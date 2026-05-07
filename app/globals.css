@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
-* {
+/* ── Custom font ───────────────────────── */
+@font-face {
+  font-family: "Sora";
+  src: url("/Sora-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Base ──────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -11,10 +21,35 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: #021c22;
+  background: #02181d;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
-html {
-  scroll-behavior: smooth;
+
+/* ── Animations ────────────────────────── */
+@keyframes ribbon {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-ribbon {
+  animation: ribbon 22s linear infinite;
+}
+
+/* ── Scrollbar ─────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #02181d;
+}
+::-webkit-scrollbar-thumb {
+  background: #063743;
+  border-radius: 4px;
+}
+
+/* ── Utility ───────────────────────────── */
+.font-sora {
+  font-family: "Sora", Arial, sans-serif;
 }
