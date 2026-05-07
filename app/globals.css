@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* ── Custom font ───────────────────────── */
 @font-face {
   font-family: "Sora";
   src: url("/Sora-ExtraBold.ttf") format("truetype");
@@ -9,47 +8,86 @@
   font-display: swap;
 }
 
-/* ── Base ──────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   padding: 0;
-  background: #02181d;
+  background: #020f12;
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Georgia', 'Times New Roman', serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Animations ────────────────────────── */
+/* ── Ribbon scroll ─────────────────────── */
 @keyframes ribbon {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+.animate-ribbon { animation: ribbon 26s linear infinite; }
 
-.animate-ribbon {
-  animation: ribbon 22s linear infinite;
+/* ── Particle float ────────────────────── */
+@keyframes floatUp {
+  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(-120px) translateX(12px) scale(0.6); opacity: 0; }
+}
+.particle { animation: floatUp linear infinite; }
+
+/* ── Ripple ring ───────────────────────── */
+@keyframes rippleOut {
+  0%   { transform: scale(0.6); opacity: 0.5; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.ripple-ring { animation: rippleOut ease-out infinite; }
+
+/* ── Shimmer wave ──────────────────────── */
+@keyframes waveShift {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+.wave-shimmer {
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(34,211,238,0.06) 40%,
+    rgba(34,211,238,0.12) 50%, rgba(34,211,238,0.06) 60%, transparent 100%);
+  background-size: 200% 100%;
+  animation: waveShift 6s ease infinite;
+}
+
+/* ── Slow bob ──────────────────────────── */
+@keyframes slowBob {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+.slow-bob { animation: slowBob 6s ease-in-out infinite; }
+
+/* ── Weight pill selected ──────────────── */
+.weight-pill-active {
+  background: rgba(34,211,238,0.15);
+  border-color: rgba(34,211,238,0.6);
+  color: #22d3ee;
+}
+
+/* ── Glassmorphism card ────────────────── */
+.glass-card {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ── Glow on hover ─────────────────────── */
+.glow-hover:hover {
+  box-shadow: 0 0 40px rgba(34,211,238,0.12), 0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* ── Scrollbar ─────────────────────────── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: #02181d;
-}
-::-webkit-scrollbar-thumb {
-  background: #063743;
-  border-radius: 4px;
-}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #020f12; }
+::-webkit-scrollbar-thumb { background: #0a3040; border-radius: 3px; }
 
-/* ── Utility ───────────────────────────── */
-.font-sora {
-  font-family: "Sora", Arial, sans-serif;
-}
+/* ── Selection ─────────────────────────── */
+::selection { background: rgba(34,211,238,0.2); color: white; }
