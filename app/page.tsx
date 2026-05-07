@@ -295,7 +295,14 @@ export default function HomePage() {
 
           <div className="flex gap-6 text-gray-300">
 
-            <a href="#">Instagram</a>
+            <a
+  href="https://www.instagram.com/dakhshrimp/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hover:text-cyan-400 transition"
+>
+  Instagram
+</a>
             <a href="#">WhatsApp</a>
             <a href="#">Contact</a>
 
