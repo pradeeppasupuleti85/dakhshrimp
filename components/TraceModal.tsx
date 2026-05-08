@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { BatchData } from "@/lib/batchData";
+import { BatchData } from "@/lib/types";
 
 interface Props {
   batch: BatchData;
