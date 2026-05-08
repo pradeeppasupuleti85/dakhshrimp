@@ -2,15 +2,13 @@ export interface BatchData {
   batchId: string;
   productName: string;
   variety: string;
-  weight: string;
-  grade: string;
+  source: string;
   farm: string;
   pondId: string;
   location: string;
   district: string;
   waterSource: string;
   coords: string;
-  pondArea: string;
   harvestDate: string;
   processingDate: string;
   labDate: string;
@@ -22,7 +20,6 @@ export interface BatchData {
   microbialCount: string;
   fssaiCompliant: string;
   tempRange: string;
-  tempMaintained: string;
-  storageFacility: string;
   tempScore: number;
+  storageFacility: string;
 }
