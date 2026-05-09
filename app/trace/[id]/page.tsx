@@ -273,7 +273,6 @@ export default async function TracePage({
         >
           <DataRow label="Batch ID" value={batch.batchId} mono accent />
           <DataRow label="Variety" value={batch.variety} />
-          <DataRow label="Status" value={batch.status} accent />
           <DataRow label="Available Sizes" value={batch.packSizes.join(" · ")} />
         </SectionCard>
 
