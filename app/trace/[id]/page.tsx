@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getBatch, getAllBatchIds } from "@/lib/batchData";
+import { getBatch } from "@/lib/batchData";
 
 const WA = "919999999999";
 
@@ -24,7 +24,11 @@ export async function generateMetadata({
 
 // ─── STATIC PARAMS ────────────────────────────────────────────────
 export function generateStaticParams() {
-  return getAllBatchIds().map((id) => ({ id }));
+  return [
+    { id: "NS-240801-A" },
+    { id: "CR-240801-A" },
+    { id: "TS-240801-A" },
+  ];
 }
 
 // ─── SMALL COMPONENTS ─────────────────────────────────────────────
