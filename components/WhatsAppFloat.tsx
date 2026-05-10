@@ -3,7 +3,7 @@ const WA_NUMBER = "919866059902";
 export default function WhatsAppFloat() {
   return (
     <a
-      href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKSH%20Shrimps%20%26%20Co!%20I%27d%20like%20to%20order.`}
+      href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKH%20Shrimps%20%26%20Co!%20I%27d%20like%20to%20order.`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Order on WhatsApp"
