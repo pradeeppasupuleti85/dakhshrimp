@@ -23,11 +23,11 @@ export default function FooterCTA() {
             <span className="text-cyan-400/80 italic">trust makes.</span>
           </h2>
           <p className="text-white/30 text-sm font-light mb-8 leading-relaxed">
-            Order premium DAKSH Shrimps. Delivered fresh.<br />
+            Order premium DAKH Shrimps. Delivered fresh.<br />
             Every pack QR verified. Every batch lab certified.
           </p>
           <a
-            href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKSH%20Shrimps%20%26%20Co!%20I%27d%20like%20to%20place%20an%20order.%20Please%20share%20your%20availability.`}
+            href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKH%20Shrimps%20%26%20Co!%20I%27d%20like%20to%20place%20an%20order.%20Please%20share%20your%20availability.`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1fb856] text-white font-bold text-[0.95rem] px-8 py-4 rounded-2xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-900/30"
@@ -58,13 +58,13 @@ export default function FooterCTA() {
             <div className="flex items-center gap-3">
               <Image
                 src="/images/logos/Dakhsrimp-logo.png"
-                alt="DAKSH Shrimps & Co."
+                alt="DAKH Shrimps & Co."
                 width={36}
                 height={36}
                 className="rounded-full object-contain opacity-70"
               />
               <div>
-                <div className="text-white/70 font-bold text-sm tracking-wide">DAKSH Shrimps & Co.</div>
+                <div className="text-white/70 font-bold text-sm tracking-wide">DAKH Shrimps & Co.</div>
                 <div className="text-white/20 text-[0.6rem] tracking-wider">Premium Indian Seafood</div>
               </div>
             </div>
