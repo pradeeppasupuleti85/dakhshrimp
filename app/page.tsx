@@ -110,10 +110,10 @@ export default function HomePage() {
             className="text-white font-black mb-6 tracking-tight"
             style={{ fontFamily: "'Georgia', serif", fontSize: "clamp(1.7rem, 6vw, 2.4rem)" }}
           >
-            About DAKSH Shrimps & Co.
+            About DAKH Shrimps & Co.
           </h2>
           <p className="text-white/35 text-sm leading-[1.85] font-light">
-            DAKSH Shrimps & Co. is India's premium transparent seafood brand —
+            DAKH Shrimps & Co. is India's premium transparent seafood brand —
             built on the belief that every customer deserves to know exactly
             where their food comes from. We source from traditional village ponds
             across Andhra Pradesh, lab-test every batch, and attach a QR code to
