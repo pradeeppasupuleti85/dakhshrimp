@@ -29,13 +29,13 @@ export default function Navbar() {
           <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-white/10">
             <Image
               src="/images/logos/Dakhsrimp-logo.png"
-              alt="DAKSH Shrimps & Co."
+              alt="DAKH Shrimps & Co."
               fill
               className="object-contain"
             />
           </div>
           <div className="leading-none">
-            <div className="text-white text-xs font-bold tracking-wide">DAKSH Shrimps</div>
+            <div className="text-white text-xs font-bold tracking-wide">DAKH Shrimps</div>
             <div className="text-white/30 text-[0.6rem] tracking-[0.12em] uppercase">&amp; Co.</div>
           </div>
         </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
 
         {/* WA */}
         <a
-          href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKSH%20Shrimps!%20I%27d%20like%20to%20order.`}
+          href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKH%20Shrimps!%20I%27d%20like%20to%20order.`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1fb856] text-white text-[0.72rem] font-semibold px-3.5 py-2 rounded-full transition-all hover:shadow-lg hover:shadow-green-900/30"
