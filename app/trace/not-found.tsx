@@ -38,7 +38,7 @@ export default function BatchNotFound() {
 
       {/* Trust line */}
       <p className="text-white/15 text-[0.6rem] uppercase tracking-[0.14em] mb-8">
-        Every legitimate DAKSH batch is traceable.
+        Every legitimate DAKH batch is traceable.
       </p>
 
       {/* Actions */}
@@ -50,7 +50,7 @@ export default function BatchNotFound() {
           ← Back to Homepage
         </Link>
         <a
-          href="https://wa.me/919999999999?text=Hi%20DAKSH!%20I%20scanned%20a%20QR%20code%20but%20the%20batch%20was%20not%20found."
+          href="https://wa.me/919999999999?text=Hi%20DAKH!%20I%20scanned%20a%20QR%20code%20but%20the%20batch%20was%20not%20found."
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] font-semibold text-sm py-3.5 rounded-xl transition hover:bg-[#25D366]/18"
@@ -64,7 +64,7 @@ export default function BatchNotFound() {
 
       {/* Brand footer */}
       <p className="text-white/10 text-[0.58rem] mt-10">
-        DAKSH Shrimps &amp; Co. · FSSAI Reg. 10013022000041
+        DAKH Shrimps &amp; Co. · FSSAI Reg. 10013022000041
       </p>
     </div>
   );
