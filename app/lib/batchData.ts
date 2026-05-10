@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────
-// DAKSH Traceability Data Layer
+// DAKH Traceability Data Layer
 // Currently: mock JSON → Future: swap getBatch() body for Airtable
 // ─────────────────────────────────────────────────────────────────
 
@@ -51,7 +51,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     tempRange: "0°C to 4°C",
     tempMaintained: "Maintained",
     tempScore: 98,
-    storageFacility: "DAKSH Cold Room, Ganapavaram",
+    storageFacility: "DAKH Cold Room, Ganapavaram",
     packSizes: ["600g", "1kg"],
     status: "Active",
   },
@@ -76,7 +76,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     tempRange: "0°C to 4°C",
     tempMaintained: "Maintained",
     tempScore: 100,
-    storageFacility: "DAKSH Facility, Bhimavaram",
+    storageFacility: "DAKH Facility, Bhimavaram",
     packSizes: ["600g", "1kg"],
     status: "Active",
   },
@@ -101,7 +101,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     tempRange: "0°C to 3°C",
     tempMaintained: "Maintained",
     tempScore: 99,
-    storageFacility: "DAKSH Export Cold Chain, Kavali",
+    storageFacility: "DAKH Export Cold Chain, Kavali",
     packSizes: ["600g", "1kg"],
     status: "Active",
   },
