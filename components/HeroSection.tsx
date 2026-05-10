@@ -212,7 +212,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-white/40 text-[0.92rem] leading-[1.75] max-w-sm mb-8 font-light tracking-wide">
-          Every pack of DAKSH Shrimps carries a QR code — linked to its harvest pond,
+          Every pack of DAKH Shrimps carries a QR code — linked to its harvest pond,
           lab certificate, and cold chain record. From Andhra's coast to your kitchen.
         </p>
 
@@ -246,7 +246,7 @@ export default function HeroSection() {
             Trace a Batch
           </Link>
           <a
-            href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKSH%20Shrimps!%20I%27d%20like%20to%20order.`}
+            href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKH%20Shrimps!%20I%27d%20like%20to%20order.`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] hover:bg-[#25D366]/20 text-sm font-medium px-6 py-3.5 rounded-xl transition-all"
@@ -285,7 +285,7 @@ export default function HeroSection() {
       <div className="absolute right-6 bottom-20 hidden lg:block z-10 slow-bob">
         <Image
           src="/images/logos/Dakhsrimp-logo.png"
-          alt="DAKSH Shrimps & Co."
+          alt="DAKH Shrimps & Co."
           width={200}
           height={200}
           className="object-contain opacity-80"
