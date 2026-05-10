@@ -1,7 +1,6 @@
 // ─────────────────────────────────────────────────────────────────
-// DAKH Traceability Data Layer
-// Currently: mock JSON  →  Future: swap fetchBatch() to Airtable API
-// To add Airtable later, only edit the getBatch() function below.
+// DAKSH Traceability Data Layer
+// Currently: mock JSON → Future: swap getBatch() body for Airtable
 // ─────────────────────────────────────────────────────────────────
 
 export interface BatchData {
@@ -16,23 +15,19 @@ export interface BatchData {
   processingDate: string;
   packagedDate: string;
   labDate: string;
-  labStatus: "Passed" | "Failed" | "Pending";
+  labStatus: string;
   labName: string;
   antibioticResult: string;
   heavyMetals: string;
   microbialCount: string;
   fssaiNumber: string;
   tempRange: string;
-  tempMaintained: "Maintained" | "Breach Detected";
+  tempMaintained: string;
   tempScore: number;
   storageFacility: string;
   packSizes: string[];
-  status: "Active" | "Recalled" | "Expired";
+  status: string;
 }
-
-// ─── MOCK DATA ────────────────────────────────────────────────────
-// Replace this with an Airtable fetch when ready.
-// Keep the same BatchData shape — nothing else needs to change.
 
 const MOCK_BATCHES: Record<string, BatchData> = {
   "NS-240801-A": {
@@ -42,7 +37,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     farm: "Coastal Blue Aqua Farm",
     district: "Krishna District, Andhra Pradesh",
     waterSource: "Brackish water, canal fed",
-    coords: "16.4201° N, 80.9935° E",
+    coords: "16.4201 N, 80.9935 E",
     harvestDate: "01 Aug 2026",
     processingDate: "02 Aug 2026",
     packagedDate: "03 Aug 2026",
@@ -51,7 +46,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     labName: "Eurofins Food Testing India Pvt Ltd, Hyderabad",
     antibioticResult: "Not Detected (< 0.001 ppm)",
     heavyMetals: "Below permissible limits",
-    microbialCount: "TVC < 1×10⁵ CFU/g — Safe",
+    microbialCount: "TVC < 1x10^5 CFU/g — Safe",
     fssaiNumber: "10013022000041",
     tempRange: "0°C to 4°C",
     tempMaintained: "Maintained",
@@ -67,7 +62,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     farm: "Sri Lakshmi Village Pond Farm",
     district: "West Godavari District, Andhra Pradesh",
     waterSource: "Traditional brackish pond, tidal fed",
-    coords: "16.5448° N, 81.5212° E",
+    coords: "16.5448 N, 81.5212 E",
     harvestDate: "01 Aug 2026",
     processingDate: "02 Aug 2026",
     packagedDate: "03 Aug 2026",
@@ -76,7 +71,7 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     labName: "SGS India Pvt Ltd, Vijayawada",
     antibioticResult: "Not Detected",
     heavyMetals: "Below permissible limits",
-    microbialCount: "TVC < 5×10⁴ CFU/g — Safe",
+    microbialCount: "TVC < 5x10^4 CFU/g — Safe",
     fssaiNumber: "10013022000041",
     tempRange: "0°C to 4°C",
     tempMaintained: "Maintained",
@@ -92,16 +87,16 @@ const MOCK_BATCHES: Record<string, BatchData> = {
     farm: "Kavali Export Aqua Farms",
     district: "Nellore District, Andhra Pradesh",
     waterSource: "Saline water, sea inlet fed",
-    coords: "14.9167° N, 79.9944° E",
+    coords: "14.9167 N, 79.9944 E",
     harvestDate: "01 Aug 2026",
     processingDate: "02 Aug 2026",
     packagedDate: "03 Aug 2026",
     labDate: "02 Aug 2026",
     labStatus: "Passed",
-    labName: "TÜV SÜD South Asia, Hyderabad",
+    labName: "TUV SUD South Asia, Hyderabad",
     antibioticResult: "Not Detected (< 0.001 ppm)",
     heavyMetals: "Below permissible limits",
-    microbialCount: "TVC < 3×10⁴ CFU/g — Safe",
+    microbialCount: "TVC < 3x10^4 CFU/g — Safe",
     fssaiNumber: "10013022000041",
     tempRange: "0°C to 3°C",
     tempMaintained: "Maintained",
@@ -112,26 +107,6 @@ const MOCK_BATCHES: Record<string, BatchData> = {
   },
 };
 
-// ─── DATA ACCESS FUNCTION ─────────────────────────────────────────
-// This is the ONLY function the trace page calls.
-// Swap the body below for an Airtable fetch when ready —
-// the page.tsx does not need to change at all.
-
 export async function getBatch(id: string): Promise<BatchData | null> {
-  // ── FUTURE AIRTABLE SWAP ──────────────────────────────────────
-  // const res = await fetch(
-  //   `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Batches` +
-  //   `?filterByFormula={batchId}="${id}"`,
-  //   { headers: { Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}` },
-  //     next: { revalidate: 60 } }
-  // );
-  // const json = await res.json();
-  // return json.records[0]?.fields ?? null;
-  // ─────────────────────────────────────────────────────────────
-
   return MOCK_BATCHES[id] ?? null;
-}
-
-export function getAllBatchIds(): string[] {
-  return Object.keys(MOCK_BATCHES);
 }
