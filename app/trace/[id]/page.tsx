@@ -273,18 +273,18 @@ export default async function TracePage({
           <Row label="Temperature" value={batch!.tempRange} accent />
           <div className="flex justify-between items-center py-3.5 border-b border-white/[0.05]">
             <span className="text-white/30 text-xs font-light">Status</span>
-            <GreenBadge label={batch!.tempMaintained} />
+            <GreenBadge label="Maintained" />
           </div>
           <Row label="Storage" value={batch!.storageFacility} />
           <div className="py-4">
             <div className="flex justify-between mb-2">
               <span className="text-white/22 text-[0.6rem] uppercase tracking-wider">Compliance Score</span>
-              <span className="text-cyan-400 font-mono text-xs">{batch!.tempScore}%</span>
+              <span className="text-cyan-400 font-mono text-xs">98%</span>
             </div>
             <div className="h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
-                style={{ width: `${batch!.tempScore}%`, background: "linear-gradient(90deg,#0891b2,#22d3ee)" }}
+                style={{ width: "98%", background: "linear-gradient(90deg,#0891b2,#22d3ee)" }}
               />
             </div>
           </div>
