@@ -6,7 +6,7 @@ export default function TraceLoading() {
         className="text-white font-black text-2xl tracking-widest"
         style={{ fontFamily: "'Georgia', serif" }}
       >
-        DAKSH<span className="text-yellow-400">.</span>
+        DAKH<span className="text-yellow-400">.</span>
       </div>
 
       {/* Spinner */}
