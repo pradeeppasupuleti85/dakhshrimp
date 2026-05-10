@@ -14,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const batch = await getBatch(id);
-  if (!batch) return { title: "Batch Not Found — DAKSH Shrimps" };
+  if (!batch) return { title: "Batch Not Found — DAKH Shrimps" };
   return {
     title: `${batch.variety} · ${batch.batchId} — DAKSH Trace`,
     description: `Verified batch ${batch.batchId}. Harvested ${batch.harvestDate} from ${batch.source}.`,
