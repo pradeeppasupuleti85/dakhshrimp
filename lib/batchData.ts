@@ -48,7 +48,7 @@ export const BATCH_DATA: Record<string, BatchData> = {
     fssaiCompliant: "Yes — Reg. 10013022000041",
     tempRange: "0°C to 4°C",
     tempScore: 98,
-    storageFacility: "DAKSH Cold Room, Ganapavaram",
+    storageFacility: "DAKH Cold Room, Ganapavaram",
   },
   "CR-240801-A": {
     batchId: "CR-240801-A",
@@ -73,7 +73,7 @@ export const BATCH_DATA: Record<string, BatchData> = {
     fssaiCompliant: "Yes — Reg. 10013022000041",
     tempRange: "0°C to 4°C",
     tempScore: 100,
-    storageFacility: "DAKSH Facility, Bhimavaram",
+    storageFacility: "DAKH Facility, Bhimavaram",
   },
   "TS-240801-A": {
     batchId: "TS-240801-A",
@@ -98,7 +98,7 @@ export const BATCH_DATA: Record<string, BatchData> = {
     fssaiCompliant: "Yes — Reg. 10013022000041",
     tempRange: "0°C to 3°C",
     tempScore: 99,
-    storageFacility: "DAKSH Export Cold Chain, Kavali",
+    storageFacility: "DAKH Export Cold Chain, Kavali",
   },
 };
 
