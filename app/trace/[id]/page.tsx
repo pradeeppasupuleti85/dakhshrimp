@@ -131,9 +131,10 @@ function Step({
 export default async function TracePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const batch: BatchData | null = await getBatch(params.id);
+  const { id } = await params;
+  const batch: BatchData | null = await getBatch(id);
   if (!batch) notFound();
 
   const waOrder = encodeURIComponent(
