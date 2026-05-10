@@ -261,7 +261,7 @@ export default async function TracePage({
           <Row label="Microbial Count" value={batch!.microbialCount} accent />
           <div className="flex justify-between items-center py-3.5">
             <span className="text-white/30 text-xs font-light">FSSAI</span>
-            <GoldBadge label={`Reg. ${batch!.fssaiNumber}`} />
+            <GoldBadge label="FSSAI Certified" />
           </div>
         </Card>
 
