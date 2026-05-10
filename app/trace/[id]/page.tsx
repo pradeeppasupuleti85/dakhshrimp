@@ -219,8 +219,6 @@ export default async function TracePage({
         >
           <Row label="Batch ID" value={batch!.batchId} mono accent />
           <Row label="Product" value={batch!.variety} />
-          <Row label="Pack Sizes" value={batch!.packSizes.join(" · ")} />
-          <Row label="Status" value={batch!.status} accent />
         </Card>
 
         {/* Source */}
