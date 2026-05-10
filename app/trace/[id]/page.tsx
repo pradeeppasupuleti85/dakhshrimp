@@ -10,9 +10,10 @@ const WA = "919999999999";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const batch = await getBatch(params.id);
+  const { id } = await params;
+  const batch = await getBatch(id);
   if (!batch) return { title: "Batch Not Found — DAKSH Shrimps" };
   return {
     title: `${batch.variety} · ${batch.batchId} — DAKSH Trace`,
