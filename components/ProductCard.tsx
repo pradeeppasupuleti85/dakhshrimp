@@ -72,7 +72,7 @@ export default function ProductCard({
   }[accentColor];
 
   const waMsg = encodeURIComponent(
-    `Hi DAKSH Shrimps! I'd like to order ${name} — ${selected.weight} pack at ₹${selected.price}. Batch: ${batchId}`
+    `Hi DAKH Shrimps! I'd like to order ${name} — ${selected.weight} pack at ₹${selected.price}. Batch: ${batchId}`
   );
 
   return (
