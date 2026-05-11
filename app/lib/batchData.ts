@@ -1,94 +1,112 @@
-import { BatchData } from "./types";
+// ─────────────────────────────────────────────────────────────────
+// DAKH Traceability Data Layer
+// Currently: mock JSON → Future: swap getBatch() body for Airtable
+// ─────────────────────────────────────────────────────────────────
 
-export const BATCH_DATA: Record<string, BatchData> = {
-  "DAKH-2024-AP-001": {
-    batchId: "DAKH-2024-AP-001",
-    productName: "Tiger Prawns",
-    variety: "Penaeus monodon (Black Tiger)",
-    weight: "500g",
-    grade: "L1 (21–25 count/kg)",
-    farm: "Sri Lakshmi Aqua Farm",
-    pondId: "POND-NLR-007",
-    location: "Nellore, Andhra Pradesh",
-    district: "Nellore District",
-    waterSource: "Brackish water, tidal creek fed",
-    coords: "14.4426° N, 79.9865° E",
-    pondArea: "2.4 hectares",
-    harvestDate: "12 Nov 2024",
-    processingDate: "13 Nov 2024",
-    labDate: "14 Nov 2024",
-    packagedDate: "15 Nov 2024",
+export interface BatchData {
+  batchId: string;
+  variety: string;
+  source: string;
+  farm: string;
+  district: string;
+  waterSource: string;
+  coords: string;
+  harvestDate: string;
+  processingDate: string;
+  packagedDate: string;
+  labDate: string;
+  labStatus: string;
+  labName: string;
+  antibioticResult: string;
+  heavyMetals: string;
+  microbialCount: string;
+  fssaiNumber: string;
+  tempRange: string;
+  tempMaintained: string;
+  tempScore: number;
+  storageFacility: string;
+  packSizes: string[];
+  status: string;
+}
+
+const MOCK_BATCHES: Record<string, BatchData> = {
+  "NS-240801-A": {
+    batchId: "NS-240801-A",
+    variety: "Normal Shrimp",
+    source: "Ganapavaram",
+    farm: "Coastal Blue Aqua Farm",
+    district: "Krishna District, Andhra Pradesh",
+    waterSource: "Brackish water, canal fed",
+    coords: "16.4201 N, 80.9935 E",
+    harvestDate: "01 Aug 2026",
+    processingDate: "02 Aug 2026",
+    packagedDate: "03 Aug 2026",
+    labDate: "02 Aug 2026",
     labStatus: "Passed",
     labName: "Eurofins Food Testing India Pvt Ltd, Hyderabad",
     antibioticResult: "Not Detected (< 0.001 ppm)",
     heavyMetals: "Below permissible limits",
-    microbialCount: "TVC < 1×10⁵ CFU/g — Safe",
-    fssaiCompliant: "Yes — Reg. 10013022000041",
+    microbialCount: "TVC < 1x10^5 CFU/g — Safe",
+    fssaiNumber: "10013022000041",
     tempRange: "0°C to 4°C",
-    tempMaintained: "100% Compliant",
-    storageFacility: "DAKH Cold Room, Nellore Facility",
+    tempMaintained: "Maintained",
     tempScore: 98,
+    storageFacility: "DAKH Cold Room, Ganapavaram",
+    packSizes: ["600g", "1kg"],
+    status: "Active",
   },
-  "DAKH-2024-AP-002": {
-    batchId: "DAKH-2024-AP-002",
-    productName: "Chitti Royyalu",
-    variety: "Litopenaeus vannamei (Pacific White)",
-    weight: "500g",
-    grade: "M2 (41–50 count/kg)",
-    farm: "Coastal Blue Aqua Pvt Ltd",
-    pondId: "POND-GTR-003",
-    location: "Guntur, Andhra Pradesh",
-    district: "Guntur District",
-    waterSource: "Saline water, bore well supplemented",
-    coords: "15.9129° N, 80.3371° E",
-    pondArea: "1.8 hectares",
-    harvestDate: "18 Nov 2024",
-    processingDate: "18 Nov 2024",
-    labDate: "19 Nov 2024",
-    packagedDate: "20 Nov 2024",
+  "CR-240801-A": {
+    batchId: "CR-240801-A",
+    variety: "Chitti Royyalu",
+    source: "Bhimavaram",
+    farm: "Sri Lakshmi Village Pond Farm",
+    district: "West Godavari District, Andhra Pradesh",
+    waterSource: "Traditional brackish pond, tidal fed",
+    coords: "16.5448 N, 81.5212 E",
+    harvestDate: "01 Aug 2026",
+    processingDate: "02 Aug 2026",
+    packagedDate: "03 Aug 2026",
+    labDate: "02 Aug 2026",
     labStatus: "Passed",
     labName: "SGS India Pvt Ltd, Vijayawada",
-    antibioticResult: "Not Detected (< 0.001 ppm)",
-    heavyMetals: "Below permissible limits",
-    microbialCount: "TVC < 5×10⁴ CFU/g — Safe",
-    fssaiCompliant: "Yes — Reg. 10013022000041",
-    tempRange: "0°C to 3°C",
-    tempMaintained: "100% Compliant",
-    storageFacility: "AquaChill Cold Storage, Guntur",
-    tempScore: 100,
-  },
-  "DAKH-2024-AP-003": {
-    batchId: "DAKH-2024-AP-003",
-    productName: "Frozen Peeled Shrimp",
-    variety: "L. vannamei — Peeled & Deveined",
-    weight: "500g",
-    grade: "PD (Peeled & Deveined)",
-    farm: "DAKH Processing Unit",
-    pondId: "POND-VJW-MULTI",
-    location: "Vijayawada, Andhra Pradesh",
-    district: "Krishna District",
-    waterSource: "Multiple certified pond sources",
-    coords: "16.5062° N, 80.6480° E",
-    pondArea: "Processing Unit — 1,200 sq.ft.",
-    harvestDate: "10 Nov 2024",
-    processingDate: "22 Nov 2024",
-    labDate: "23 Nov 2024",
-    packagedDate: "24 Nov 2024",
-    labStatus: "Passed",
-    labName: "TÜV SÜD South Asia, Hyderabad",
     antibioticResult: "Not Detected",
     heavyMetals: "Below permissible limits",
-    microbialCount: "Pathogen Free — HACCP Certified",
-    fssaiCompliant: "Yes — Reg. 10013022000041",
-    tempRange: "-18°C (Frozen)",
-    tempMaintained: "100% Compliant",
-    storageFacility: "DAKH Freeze Unit, Vijayawada",
-    tempScore: 96,
+    microbialCount: "TVC < 5x10^4 CFU/g — Safe",
+    fssaiNumber: "10013022000041",
+    tempRange: "0°C to 4°C",
+    tempMaintained: "Maintained",
+    tempScore: 100,
+    storageFacility: "DAKH Facility, Bhimavaram",
+    packSizes: ["600g", "1kg"],
+    status: "Active",
+  },
+  "TS-240801-A": {
+    batchId: "TS-240801-A",
+    variety: "Tiger Shrimp",
+    source: "Kavali",
+    farm: "Kavali Export Aqua Farms",
+    district: "Nellore District, Andhra Pradesh",
+    waterSource: "Saline water, sea inlet fed",
+    coords: "14.9167 N, 79.9944 E",
+    harvestDate: "01 Aug 2026",
+    processingDate: "02 Aug 2026",
+    packagedDate: "03 Aug 2026",
+    labDate: "02 Aug 2026",
+    labStatus: "Passed",
+    labName: "TUV SUD South Asia, Hyderabad",
+    antibioticResult: "Not Detected (< 0.001 ppm)",
+    heavyMetals: "Below permissible limits",
+    microbialCount: "TVC < 3x10^4 CFU/g — Safe",
+    fssaiNumber: "10013022000041",
+    tempRange: "0°C to 3°C",
+    tempMaintained: "Maintained",
+    tempScore: 99,
+    storageFacility: "DAKH Export Cold Chain, Kavali",
+    packSizes: ["600g", "1kg"],
+    status: "Active",
   },
 };
 
-export function getBatch(id: string): BatchData | null {
-  return BATCH_DATA[id] ?? null;
+export async function getBatch(id: string): Promise<BatchData | null> {
+  return MOCK_BATCHES[id] ?? null;
 }
-
-export const ALL_BATCHES = Object.values(BATCH_DATA);

@@ -1,89 +1,104 @@
-import { BatchData } from "./types";
+export interface BatchData {
+  batchId: string;
+  productName: string;
+  variety: string;
+  source: string;
+  farm: string;
+  pondId: string;
+  location: string;
+  district: string;
+  waterSource: string;
+  coords: string;
+  harvestDate: string;
+  processingDate: string;
+  labDate: string;
+  packagedDate: string;
+  labStatus: "Passed" | "Failed" | "Pending";
+  labName: string;
+  antibioticResult: string;
+  heavyMetals: string;
+  microbialCount: string;
+  fssaiCompliant: string;
+  tempRange: string;
+  tempScore: number;
+  storageFacility: string;
+}
 
 export const BATCH_DATA: Record<string, BatchData> = {
-  "DAKH-2024-AP-001": {
-    batchId: "DAKH-2024-AP-001",
-    productName: "Tiger Prawns",
-    variety: "Penaeus monodon (Black Tiger)",
-    weight: "500g",
-    grade: "L1 (21–25 count/kg)",
-    farm: "Sri Lakshmi Aqua Farm",
-    pondId: "POND-NLR-007",
-    location: "Nellore, Andhra Pradesh",
-    district: "Nellore District",
-    waterSource: "Brackish water, tidal creek fed",
-    coords: "14.4426° N, 79.9865° E",
-    pondArea: "2.4 hectares",
-    harvestDate: "12 Nov 2024",
-    processingDate: "13 Nov 2024",
-    labDate: "14 Nov 2024",
-    packagedDate: "15 Nov 2024",
+  "NS-240801-A": {
+    batchId: "NS-240801-A",
+    productName: "Normal Shrimp",
+    variety: "Litopenaeus vannamei (Pacific White)",
+    source: "Ganapavaram",
+    farm: "Coastal Blue Aqua Farm",
+    pondId: "POND-GNP-004",
+    location: "Ganapavaram, Andhra Pradesh",
+    district: "Krishna District",
+    waterSource: "Brackish water, canal fed",
+    coords: "16.4201° N, 80.9935° E",
+    harvestDate: "01 Aug 2024",
+    processingDate: "02 Aug 2024",
+    labDate: "03 Aug 2024",
+    packagedDate: "04 Aug 2024",
     labStatus: "Passed",
-    labName: "Eurofins Food Testing India Pvt Ltd, Hyderabad",
+    labName: "Eurofins Food Testing India, Hyderabad",
     antibioticResult: "Not Detected (< 0.001 ppm)",
     heavyMetals: "Below permissible limits",
     microbialCount: "TVC < 1×10⁵ CFU/g — Safe",
     fssaiCompliant: "Yes — Reg. 10013022000041",
     tempRange: "0°C to 4°C",
-    tempMaintained: "100% Compliant",
-    storageFacility: "DAKH Cold Room, Nellore Facility",
     tempScore: 98,
+    storageFacility: "DAKH Cold Room, Ganapavaram",
   },
-  "DAKH-2024-AP-002": {
-    batchId: "DAKH-2024-AP-002",
+  "CR-240801-A": {
+    batchId: "CR-240801-A",
     productName: "Chitti Royyalu",
-    variety: "Litopenaeus vannamei (Pacific White)",
-    weight: "500g",
-    grade: "M2 (41–50 count/kg)",
-    farm: "Coastal Blue Aqua Pvt Ltd",
-    pondId: "POND-GTR-003",
-    location: "Guntur, Andhra Pradesh",
-    district: "Guntur District",
-    waterSource: "Saline water, bore well supplemented",
-    coords: "15.9129° N, 80.3371° E",
-    pondArea: "1.8 hectares",
-    harvestDate: "18 Nov 2024",
-    processingDate: "18 Nov 2024",
-    labDate: "19 Nov 2024",
-    packagedDate: "20 Nov 2024",
+    variety: "Penaeus indicus (Indian White Prawn)",
+    source: "Bhimavaram",
+    farm: "Sri Lakshmi Village Pond Farm",
+    pondId: "POND-BHM-012",
+    location: "Bhimavaram, Andhra Pradesh",
+    district: "West Godavari District",
+    waterSource: "Traditional brackish pond, tidal fed",
+    coords: "16.5448° N, 81.5212° E",
+    harvestDate: "01 Aug 2024",
+    processingDate: "01 Aug 2024",
+    labDate: "02 Aug 2024",
+    packagedDate: "03 Aug 2024",
     labStatus: "Passed",
     labName: "SGS India Pvt Ltd, Vijayawada",
-    antibioticResult: "Not Detected (< 0.001 ppm)",
+    antibioticResult: "Not Detected",
     heavyMetals: "Below permissible limits",
     microbialCount: "TVC < 5×10⁴ CFU/g — Safe",
     fssaiCompliant: "Yes — Reg. 10013022000041",
-    tempRange: "0°C to 3°C",
-    tempMaintained: "100% Compliant",
-    storageFacility: "AquaChill Cold Storage, Guntur",
+    tempRange: "0°C to 4°C",
     tempScore: 100,
+    storageFacility: "DAKH Facility, Bhimavaram",
   },
-  "DAKH-2024-AP-003": {
-    batchId: "DAKH-2024-AP-003",
-    productName: "Frozen Peeled Shrimp",
-    variety: "L. vannamei — Peeled & Deveined",
-    weight: "500g",
-    grade: "PD (Peeled & Deveined)",
-    farm: "DAKH Processing Unit",
-    pondId: "POND-VJW-MULTI",
-    location: "Vijayawada, Andhra Pradesh",
-    district: "Krishna District",
-    waterSource: "Multiple certified pond sources",
-    coords: "16.5062° N, 80.6480° E",
-    pondArea: "Processing Unit — 1,200 sq.ft.",
-    harvestDate: "10 Nov 2024",
-    processingDate: "22 Nov 2024",
-    labDate: "23 Nov 2024",
-    packagedDate: "24 Nov 2024",
+  "TS-240801-A": {
+    batchId: "TS-240801-A",
+    productName: "Tiger Shrimp",
+    variety: "Penaeus monodon (Black Tiger Prawn)",
+    source: "Kavali",
+    farm: "Kavali Export Aqua Farms",
+    pondId: "POND-KVL-007",
+    location: "Kavali, Andhra Pradesh",
+    district: "Nellore District",
+    waterSource: "Saline water, sea inlet fed",
+    coords: "14.9167° N, 79.9944° E",
+    harvestDate: "01 Aug 2024",
+    processingDate: "02 Aug 2024",
+    labDate: "03 Aug 2024",
+    packagedDate: "04 Aug 2024",
     labStatus: "Passed",
     labName: "TÜV SÜD South Asia, Hyderabad",
-    antibioticResult: "Not Detected",
+    antibioticResult: "Not Detected (< 0.001 ppm)",
     heavyMetals: "Below permissible limits",
-    microbialCount: "Pathogen Free — HACCP Certified",
+    microbialCount: "TVC < 3×10⁴ CFU/g — Safe",
     fssaiCompliant: "Yes — Reg. 10013022000041",
-    tempRange: "-18°C (Frozen)",
-    tempMaintained: "100% Compliant",
-    storageFacility: "DAKH Freeze Unit, Vijayawada",
-    tempScore: 96,
+    tempRange: "0°C to 3°C",
+    tempScore: 99,
+    storageFacility: "DAKH Export Cold Chain, Kavali",
   },
 };
 
