@@ -313,21 +313,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Logo float — desktop only */}
-      <div
-        className="float-bob absolute hidden lg:block z-10"
-        style={{ right: 32, bottom: 60 }}
-        aria-hidden="true"
-      >
-        <Image
-          src="/images/logos/Dakhsrimp-logo.png"
-          alt=""
-          width={210}
-          height={210}
-          className="object-contain"
-          style={{ filter: "drop-shadow(0 0 50px rgba(0,180,216,0.4))" }}
-        />
-      </div>
-    </section>
+     </section>
   );
 }
