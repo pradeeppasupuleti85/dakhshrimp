@@ -226,7 +226,7 @@ export default function HeroSection() {
           style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.86rem", lineHeight: 1.75, maxWidth: 380 }}
         >
           Every pack of DAKH Shrimps carries a QR code linked to its harvest pond,
-          lab certificate, and cold chain record. From Andhra&apos;s coast to your kitchen.
+          lab certificate, and cold chain record. 
         </p>
 
         {/* Microcopy */}
