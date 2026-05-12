@@ -11,7 +11,7 @@ interface WeightOption {
 
 interface ProductCardProps {
   name: string;
-  teluguName: string;
+  teluguName?: string;
   description: string;
   badge: string;
   countPerKg: string;
@@ -47,223 +47,214 @@ export default function ProductCard({
   const [selectedIdx, setSelectedIdx] = useState(0);
   const selected = weights[selectedIdx];
 
-  const accentStyles = {
-    aqua: {
-      pill: "border-cyan-400/60 bg-cyan-400/15 text-cyan-300",
-      pillInactive: "border-white/10 text-white/40 hover:border-cyan-400/30 hover:text-white/70",
-      badge: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
-      price: "text-cyan-400",
-      glow: "rgba(34,211,238,0.08)",
-    },
-    gold: {
-      pill: "border-yellow-400/60 bg-yellow-400/15 text-yellow-300",
-      pillInactive: "border-white/10 text-white/40 hover:border-yellow-400/30 hover:text-white/70",
-      badge: "bg-yellow-400/10 text-yellow-300 border-yellow-400/20",
-      price: "text-yellow-400",
-      glow: "rgba(200,148,58,0.08)",
-    },
-    emerald: {
-      pill: "border-emerald-400/60 bg-emerald-400/15 text-emerald-300",
-      pillInactive: "border-white/10 text-white/40 hover:border-emerald-400/30 hover:text-white/70",
-      badge: "bg-emerald-400/10 text-emerald-300 border-emerald-400/20",
-      price: "text-emerald-400",
-      glow: "rgba(52,211,153,0.08)",
-    },
+  const accent = {
+    aqua:    { hex: "#00b4d8", rgb: "0,180,216",   badge: "background:#00b4d8;color:white;" },
+    gold:    { hex: "#c9a84c", rgb: "201,168,76",  badge: "background:linear-gradient(135deg,#c9a84c,#f0c94a);color:#012a4a;" },
+    emerald: { hex: "#10b981", rgb: "16,185,129",  badge: "background:#10b981;color:white;" },
   }[accentColor];
 
   const waMsg = encodeURIComponent(
-    `Hi DAKH Shrimps! I'd like to order ${name} — ${selected.weight} pack at ₹${selected.price}. Batch: ${batchId}`
+    `Hi DAKH Shrimp! I'd like to order ${name} — ${selected.weight} pack at ₹${selected.price}. Batch: ${batchId}`
   );
 
   return (
     <div
-      className="group relative glass-card rounded-2xl overflow-hidden glow-hover transition-all duration-500 hover:-translate-y-1.5"
-      style={{ boxShadow: `0 4px 40px ${accentStyles.glow}, 0 1px 0 rgba(255,255,255,0.04) inset` }}
+      className="group reveal"
+      style={{
+        background: "white",
+        borderRadius: 22,
+        overflow: "hidden",
+        border: `1px solid rgba(${accent.rgb},0.15)`,
+        boxShadow: "0 4px 20px rgba(0,150,200,0.09)",
+        transition: "transform .28s, box-shadow .28s",
+      }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
+        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 18px 50px rgba(0,150,200,0.2)";
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(0,150,200,0.09)";
+      }}
     >
-      {/* ── Image ── */}
-      <div className="relative h-56 overflow-hidden">
+      {/* Image */}
+      <div style={{ position: "relative", height: 210, overflow: "hidden", background: "#012a4a" }}>
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020f12] via-[#020f12]/30 to-transparent" />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(1,42,74,0.72) 0%,transparent 55%)" }} />
 
-        {/* Badge */}
-        <div className="absolute top-3.5 left-3.5">
-          <span className={`text-[0.62rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border ${accentStyles.badge}`}>
-            {badge}
+        {/* Badge top-left */}
+        <span
+          style={{
+            position: "absolute", top: 12, left: 12,
+            fontSize: "0.6rem", fontWeight: 800, textTransform: "uppercase",
+            letterSpacing: "0.08em", padding: "4px 12px", borderRadius: 999,
+            ...Object.fromEntries(accent.badge.split(";").filter(Boolean).map(s => {
+              const [k, v] = s.split(":");
+              return [k.trim().replace(/-([a-z])/g, (_, c) => c.toUpperCase()), v.trim()];
+            })),
+          }}
+        >
+          {badge}
+        </span>
+
+        {/* QR verified badge */}
+        <div
+          style={{
+            position: "absolute", top: 12, right: 12,
+            display: "flex", alignItems: "center", gap: 5,
+            background: "rgba(0,0,0,0.55)", backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.18)", borderRadius: 999,
+            padding: "4px 10px",
+          }}
+        >
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={accent.hex} strokeWidth="3">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+          <span style={{ color: accent.hex, fontSize: "0.56rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em" }}>
+            QR Verified
           </span>
         </div>
 
-        {/* QR Verified badge */}
-        <div className="absolute top-3.5 right-3.5 flex items-center gap-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" strokeWidth="2.5">
-            <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-          </svg>
-          <span className="text-cyan-400/90 text-[0.58rem] font-semibold uppercase tracking-wider">QR Verified</span>
-        </div>
-
         {/* Cold chain badge */}
-        <div className="absolute bottom-3.5 left-3.5 flex items-center gap-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#67e8f9" strokeWidth="2.5">
-            <path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z" />
-          </svg>
-          <span className="text-cyan-300/80 text-[0.58rem] font-semibold uppercase tracking-wider">Cold Chain Maintained</span>
-        </div>
-
-        {/* Source */}
-        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-2.5 py-1">
-          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
-          </svg>
-          <span className="text-white/40 text-[0.58rem] tracking-wide">{source}</span>
+        <div
+          style={{
+            position: "absolute", bottom: 12, left: 12,
+            display: "flex", alignItems: "center", gap: 5,
+            background: "rgba(0,0,0,0.55)", backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.14)", borderRadius: 999,
+            padding: "4px 10px",
+          }}
+        >
+          <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.56rem", fontWeight: 600 }}>
+            ❄️ Cold Chain ✓
+          </span>
         </div>
       </div>
 
-      {/* ── Body ── */}
-      <div className="p-5">
-
-        {/* Name row */}
-        <div className="mb-1">
-          <div
-            className="text-white font-black text-xl leading-tight tracking-tight"
-            style={{ fontFamily: "'Georgia', serif" }}
-          >
-            {name}
+      {/* Body */}
+      <div style={{ padding: "16px 18px 18px" }}>
+        <div style={{ fontFamily: "var(--font-playfair)", fontSize: "1.3rem", fontWeight: 800, color: "#012a4a", lineHeight: 1.1 }}>
+          {name}
+        </div>
+        {teluguName && (
+          <div style={{ fontSize: "0.72rem", fontStyle: "italic", marginTop: 2, color: accent.hex, opacity: 0.8 }}>
+            {teluguName} · {source}
           </div>
-          <div className="text-white/30 text-xs italic mt-0.5">{teluguName}</div>
-        </div>
-
-        <p className="text-white/40 text-xs leading-relaxed mb-4 font-light">{description}</p>
-
-        {/* Count info */}
-        <div className="text-white/25 text-[0.65rem] uppercase tracking-[0.1em] mb-3 flex items-center gap-1.5">
-          <span className="w-3 h-px bg-white/15 inline-block" />
+        )}
+        <p style={{ color: "#4a5568", fontSize: "0.76rem", lineHeight: 1.6, marginTop: 8, marginBottom: 10 }}>
+          {description}
+        </p>
+        <div style={{ color: "#0077a8", fontSize: "0.58rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, opacity: 0.65 }}>
           {countPerKg}
-          <span className="w-3 h-px bg-white/15 inline-block" />
         </div>
 
-        {/* Weight selector */}
-        <div className="flex gap-2 mb-4">
+        {/* Weight pills */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
           {weights.map((w, i) => (
             <button
               key={w.weight}
+              className="wpill"
+              style={i === selectedIdx ? {
+                background: accent.hex,
+                borderColor: accent.hex,
+                color: "white",
+                boxShadow: `0 3px 12px rgba(${accent.rgb},0.35)`,
+              } : {
+                borderColor: `rgba(${accent.rgb},0.35)`,
+                color: accent.hex,
+              }}
               onClick={() => setSelectedIdx(i)}
-              className={`flex-1 py-2 px-3 rounded-lg border text-[0.72rem] font-semibold tracking-wide transition-all duration-200 ${
-                i === selectedIdx ? accentStyles.pill : accentStyles.pillInactive
-              }`}
             >
               {w.weight}
             </button>
           ))}
         </div>
 
-        {/* Dynamic pricing + count */}
-        <div className="flex items-end justify-between mb-5 pt-3 border-t border-white/[0.06]">
+        {/* Price strip */}
+        <div
+          style={{
+            display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+            padding: "12px 0", marginBottom: 12,
+            borderTop: "1px solid rgba(0,150,200,0.1)",
+            borderBottom: "1px solid rgba(0,150,200,0.1)",
+          }}
+        >
           <div>
-            <div className={`font-black text-2xl leading-none ${accentStyles.price}`}
-              style={{ fontFamily: "'Georgia', serif" }}>
-              ₹{selected.price}
+            <div style={{ fontFamily: "var(--font-playfair)", fontSize: "1.9rem", fontWeight: 800, color: accent.hex, lineHeight: 1 }}>
+              ₹{selected.price.toLocaleString("en-IN")}
             </div>
-            <div className="text-white/25 text-[0.65rem] mt-1">
-              ≈ {selected.count} pieces
-            </div>
+            <div style={{ color: "#999", fontSize: "0.62rem", marginTop: 3 }}>≈ {selected.count} pieces</div>
           </div>
-          <div className="text-right">
-            <div className="text-white/20 text-[0.6rem] uppercase tracking-wider">Pack size</div>
-            <div className="text-white/50 text-sm font-semibold mt-0.5">{selected.weight}</div>
+          <div style={{ textAlign: "right" }}>
+            <div style={{ color: "#bbb", fontSize: "0.56rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>Pack size</div>
+            <div style={{ color: "#012a4a", fontSize: "0.85rem", fontWeight: 700, marginTop: 2 }}>{selected.weight}</div>
           </div>
         </div>
 
-        {/* Mini QR scan preview */}
-        <div className="mb-4 p-3 bg-white/[0.03] border border-white/[0.06] rounded-xl flex items-center gap-3">
-          {/* Tiny QR icon */}
-          <div className="w-10 h-10 bg-white rounded-lg p-1 flex-shrink-0 flex items-center justify-center">
-            <svg viewBox="0 0 21 21" className="w-full h-full">
-              <rect width="21" height="21" fill="white"/>
-              <rect x="1" y="1" width="5" height="5" fill="#020f12"/>
-              <rect x="2" y="2" width="3" height="3" fill="white"/>
-              <rect x="15" y="1" width="5" height="5" fill="#020f12"/>
-              <rect x="16" y="2" width="3" height="3" fill="white"/>
-              <rect x="1" y="15" width="5" height="5" fill="#020f12"/>
-              <rect x="2" y="16" width="3" height="3" fill="white"/>
-              <rect x="7" y="1" width="1" height="1" fill="#020f12"/>
-              <rect x="9" y="1" width="2" height="1" fill="#020f12"/>
-              <rect x="7" y="3" width="2" height="1" fill="#020f12"/>
-              <rect x="7" y="5" width="1" height="1" fill="#020f12"/>
-              <rect x="10" y="5" width="2" height="1" fill="#020f12"/>
-              <rect x="13" y="7" width="1" height="2" fill="#020f12"/>
-              <rect x="1" y="7" width="2" height="1" fill="#020f12"/>
-              <rect x="4" y="7" width="1" height="1" fill="#020f12"/>
-              <rect x="7" y="7" width="2" height="2" fill="#22d3ee"/>
-              <rect x="10" y="7" width="1" height="1" fill="#020f12"/>
-              <rect x="1" y="9" width="1" height="1" fill="#020f12"/>
-              <rect x="3" y="9" width="2" height="1" fill="#020f12"/>
-              <rect x="7" y="9" width="1" height="2" fill="#020f12"/>
-              <rect x="9" y="10" width="2" height="1" fill="#020f12"/>
-              <rect x="12" y="9" width="2" height="2" fill="#22d3ee"/>
-              <rect x="15" y="7" width="3" height="1" fill="#020f12"/>
-              <rect x="15" y="9" width="2" height="1" fill="#020f12"/>
-              <rect x="18" y="9" width="2" height="2" fill="#020f12"/>
-              <rect x="1" y="12" width="4" height="1" fill="#020f12"/>
-              <rect x="7" y="12" width="1" height="1" fill="#020f12"/>
-              <rect x="9" y="12" width="3" height="1" fill="#020f12"/>
-              <rect x="14" y="12" width="1" height="1" fill="#020f12"/>
-              <rect x="7" y="14" width="2" height="1" fill="#020f12"/>
-              <rect x="10" y="14" width="2" height="2" fill="#22d3ee"/>
-              <rect x="13" y="14" width="2" height="1" fill="#020f12"/>
-              <rect x="16" y="14" width="3" height="1" fill="#020f12"/>
-              <rect x="7" y="16" width="3" height="1" fill="#020f12"/>
-              <rect x="13" y="16" width="1" height="1" fill="#020f12"/>
-              <rect x="15" y="16" width="4" height="1" fill="#020f12"/>
-              <rect x="7" y="18" width="2" height="2" fill="#020f12"/>
-              <rect x="10" y="18" width="3" height="1" fill="#020f12"/>
-              <rect x="14" y="18" width="2" height="1" fill="#020f12"/>
-              <rect x="17" y="18" width="3" height="2" fill="#020f12"/>
+        {/* Mini QR strip */}
+        <div
+          style={{
+            display: "flex", alignItems: "center", gap: 10,
+            background: accentColor === "gold" ? "#fffbf0" : "#f0f9ff",
+            border: `1px solid rgba(${accent.rgb},0.18)`,
+            borderRadius: 12, padding: "10px 12px", marginBottom: 12,
+          }}
+        >
+          <div style={{ width: 34, height: 34, background: "white", borderRadius: 8, padding: 2, flexShrink: 0, boxShadow: "0 2px 8px rgba(0,150,200,0.15)" }}>
+            <svg viewBox="0 0 21 21" style={{ width: "100%", height: "100%" }}>
+              <rect width="21" height="21" fill="white" />
+              <rect x="1" y="1" width="5" height="5" fill="#012a4a" /><rect x="2" y="2" width="3" height="3" fill="white" />
+              <rect x="15" y="1" width="5" height="5" fill="#012a4a" /><rect x="16" y="2" width="3" height="3" fill="white" />
+              <rect x="1" y="15" width="5" height="5" fill="#012a4a" /><rect x="2" y="16" width="3" height="3" fill="white" />
+              <rect x="7" y="7" width="3" height="3" fill={accent.hex} />
+              <rect x="11" y="7" width="2" height="2" fill="#012a4a" />
+              <rect x="7" y="11" width="2" height="2" fill="#012a4a" />
+              <rect x="10" y="11" width="4" height="2" fill={accent.hex} />
+              <rect x="7" y="17" width="4" height="3" fill="#012a4a" />
+              <rect x="14" y="17" width="5" height="3" fill="#012a4a" />
             </svg>
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-white/60 text-[0.68rem] font-semibold mb-0.5">Batch: <span className="font-mono text-cyan-400/80">{batchId}</span></div>
-            <div className="text-white/25 text-[0.6rem] leading-snug">Verified through DAKH Traceability System</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ color: "#012a4a", fontSize: "0.62rem", fontWeight: 700 }}>
+              Batch: <span style={{ fontFamily: "monospace", color: accent.hex }}>{batchId}</span>
+            </div>
+            <div style={{ color: "#999", fontSize: "0.55rem", marginTop: 1 }}>Verified · DAKH Traceability System</div>
           </div>
           <Link
             href={`/trace/${batchId}`}
-            className="flex-shrink-0 text-cyan-400/60 hover:text-cyan-400 text-[0.6rem] font-semibold uppercase tracking-wider transition-colors"
+            style={{ color: accent.hex, fontSize: "0.6rem", fontWeight: 700, flexShrink: 0, textDecoration: "none" }}
           >
             Trace →
           </Link>
         </div>
 
-        {/* Action buttons */}
-        <div className="flex gap-2.5">
-          <a
-            href={`https://wa.me/${waNumber}?text=${waMsg}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb856] text-white text-xs font-bold py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-green-900/30"
-          >
-            {WA_ICON}
-            Order on WhatsApp
-          </a>
-          <Link
-            href={`/trace/${batchId}`}
-            className="flex items-center justify-center gap-1.5 border border-white/10 hover:border-cyan-400/30 text-white/40 hover:text-cyan-400 text-xs font-medium px-3.5 py-3 rounded-xl transition-all"
-            title="Trace This Batch"
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/>
-              <rect x="3" y="16" width="5" height="5"/>
-              <path d="M21 16h-3v3M15 21v-3h3M15 12h3v3M12 15v3"/>
-            </svg>
-            Trace
-          </Link>
-        </div>
+        {/* Order button */}
+        <a
+          href={`https://wa.me/${waNumber}?text=${waMsg}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            background: "#25D366", color: "white", fontWeight: 700, fontSize: "0.84rem",
+            padding: 14, borderRadius: 13, width: "100%", textDecoration: "none",
+            boxShadow: "0 4px 16px rgba(37,211,102,0.25)",
+            transition: "opacity .18s",
+          }}
+          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.9")}
+          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
+        >
+          {WA_ICON} Order on WhatsApp
+        </a>
 
-        {/* Microcopy */}
-        <p className="text-white/20 text-[0.6rem] text-center mt-3 tracking-wide">
-          From Andhra Coast to Your Kitchen
+        <p style={{ textAlign: "center", color: "#ccc", fontSize: "0.55rem", marginTop: 8, letterSpacing: "0.06em" }}>
+          From Andhra Coast to Your Kitchen 🌊
         </p>
       </div>
     </div>

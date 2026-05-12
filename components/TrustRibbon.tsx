@@ -7,22 +7,42 @@ const ITEMS = [
   "Lab Certified",
   "Village Pond Farmed",
   "Export Quality",
-  "DAKH Traceability System",
+  "DAKH Traceability",
   "Every Batch Traceable",
 ];
 
 export default function TrustRibbon() {
   const doubled = [...ITEMS, ...ITEMS];
   return (
-    <div className="bg-black/40 border-y border-white/[0.05] py-3 overflow-hidden">
-      <div className="flex gap-8 animate-ribbon whitespace-nowrap w-max">
+    <div
+      style={{
+        background: "#011829",
+        padding: "11px 0",
+        overflow: "hidden",
+        borderTop: "2px solid rgba(201,168,76,0.4)",
+        borderBottom: "1px solid rgba(0,180,216,0.08)",
+      }}
+    >
+      <div
+        className="animate-ribbon"
+        style={{ display: "flex", gap: 28, whiteSpace: "nowrap", width: "max-content" }}
+      >
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="text-white/25 text-[0.65rem] font-medium uppercase tracking-[0.15em] flex items-center gap-2"
+            style={{
+              color: "rgba(255,255,255,0.28)",
+              fontSize: "0.64rem",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
           >
             {item}
-            <span className="text-cyan-500/40">·</span>
+            <span style={{ color: "#c9a84c" }}>·</span>
           </span>
         ))}
       </div>

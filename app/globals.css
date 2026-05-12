@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* ── Fonts ── */
 @font-face {
   font-family: "Sora";
   src: url("/Sora-ExtraBold.ttf") format("truetype");
@@ -8,86 +9,126 @@
   font-display: swap;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
 body {
-  margin: 0;
-  padding: 0;
-  background: #020f12;
-  color: white;
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #dff0fa;
+  color: #012a4a;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Ribbon scroll ─────────────────────── */
-@keyframes ribbon {
+/* ── Ribbon ── */
+@keyframes ribbonScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.animate-ribbon { animation: ribbon 26s linear infinite; }
+.animate-ribbon { animation: ribbonScroll 26s linear infinite; }
 
-/* ── Particle float ────────────────────── */
-@keyframes floatUp {
-  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
-  10%  { opacity: 0.6; }
-  90%  { opacity: 0.2; }
-  100% { transform: translateY(-120px) translateX(12px) scale(0.6); opacity: 0; }
+/* ── Shimmer wave ── */
+@keyframes shimmerWave {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
 }
-.particle { animation: floatUp linear infinite; }
+.shimmer-line {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  background-size: 200% 100%;
+  animation: shimmerWave 5s ease infinite;
+}
 
-/* ── Ripple ring ───────────────────────── */
+/* ── Ripple rings ── */
 @keyframes rippleOut {
-  0%   { transform: scale(0.6); opacity: 0.5; }
-  100% { transform: scale(2.4); opacity: 0; }
+  0%   { transform: scale(0.3); opacity: 0.65; }
+  100% { transform: scale(3.8); opacity: 0; }
 }
 .ripple-ring { animation: rippleOut ease-out infinite; }
 
-/* ── Shimmer wave ──────────────────────── */
-@keyframes waveShift {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-.wave-shimmer {
-  background: linear-gradient(90deg,
-    transparent 0%, rgba(34,211,238,0.06) 40%,
-    rgba(34,211,238,0.12) 50%, rgba(34,211,238,0.06) 60%, transparent 100%);
-  background-size: 200% 100%;
-  animation: waveShift 6s ease infinite;
-}
-
-/* ── Slow bob ──────────────────────────── */
-@keyframes slowBob {
+/* ── Float bob ── */
+@keyframes floatBob {
   0%, 100% { transform: translateY(0px); }
-  50%      { transform: translateY(-8px); }
+  50%       { transform: translateY(-9px); }
 }
-.slow-bob { animation: slowBob 6s ease-in-out infinite; }
+.float-bob { animation: floatBob 5s ease-in-out infinite; }
 
-/* ── Weight pill selected ──────────────── */
-.weight-pill-active {
-  background: rgba(34,211,238,0.15);
-  border-color: rgba(34,211,238,0.6);
-  color: #22d3ee;
-}
-
-/* ── Glassmorphism card ────────────────── */
-.glass-card {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.07);
+/* ── Gold glow pulse ── */
+@keyframes goldGlow {
+  0%, 100% { box-shadow: 0 5px 18px rgba(201,168,76,0.45), 0 0 0 0 rgba(201,168,76,0); }
+  50%       { box-shadow: 0 8px 30px rgba(201,168,76,0.7),  0 0 24px 6px rgba(201,168,76,0.18); }
 }
 
-/* ── Glow on hover ─────────────────────── */
-.glow-hover:hover {
-  box-shadow: 0 0 40px rgba(34,211,238,0.12), 0 20px 60px rgba(0,0,0,0.5);
+/* ── Sparkle ── */
+@keyframes sparkle {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-30px) scale(0); opacity: 0; }
 }
 
-/* ── Scrollbar ─────────────────────────── */
+/* ── Pop in ── */
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Dot pulse ── */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(1.5); }
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ── Weight pill ── */
+.wpill {
+  border: 1.5px solid rgba(0,150,200,0.35);
+  color: #0096c7;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+}
+.wpill.active {
+  background: #00b4d8;
+  border-color: #00b4d8;
+  color: white;
+  box-shadow: 0 3px 12px rgba(0,180,216,0.35);
+}
+.wpill:hover:not(.active) {
+  border-color: #00b4d8;
+  color: #00b4d8;
+}
+
+/* ── Floating WA ── */
+.wa-float {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 280;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 22px rgba(37,211,102,0.5);
+  text-decoration: none;
+  transition: transform .2s;
+  animation: popIn .4s 1.5s backwards;
+}
+.wa-float:hover { transform: scale(1.1); }
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #020f12; }
-::-webkit-scrollbar-thumb { background: #0a3040; border-radius: 3px; }
-
-/* ── Selection ─────────────────────────── */
-::selection { background: rgba(34,211,238,0.2); color: white; }
+::-webkit-scrollbar-track { background: #dff0fa; }
+::-webkit-scrollbar-thumb { background: #00b4d8; border-radius: 3px; }

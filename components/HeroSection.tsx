@@ -1,279 +1,311 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 
-const WA_NUMBER = "919999999999";
+const WA = "919999999999";
+
+const VALUES = [
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    label: "Premium Quality",
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+    ),
+    label: "Fresh & Hygienic",
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
+      </svg>
+    ),
+    label: "Sustainable Farming",
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+      </svg>
+    ),
+    label: "Lab Certified",
+  },
+  {
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="5" height="5" />
+        <rect x="16" y="3" width="5" height="5" />
+        <rect x="3" y="16" width="5" height="5" />
+        <path d="M21 16h-3v3M15 21v-3h3M15 12h3v3M12 15v3" />
+      </svg>
+    ),
+    label: "QR Traceability",
+  },
+];
 
 export default function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    // Particles
-    const particles: {
-      x: number; y: number; r: number;
-      speedX: number; speedY: number; opacity: number; life: number; maxLife: number;
-    }[] = [];
-
-    const spawnParticle = () => {
-      const maxLife = 180 + Math.random() * 120;
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: canvas.height * 0.6 + Math.random() * canvas.height * 0.4,
-        r: 0.8 + Math.random() * 1.6,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: -(0.3 + Math.random() * 0.5),
-        opacity: 0,
-        life: 0,
-        maxLife,
-      });
-    };
-
-    for (let i = 0; i < 28; i++) spawnParticle();
-
-    let frame = 0;
-    let raf: number;
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      frame++;
-
-      if (frame % 8 === 0 && particles.length < 40) spawnParticle();
-
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.life++;
-        p.x += p.speedX;
-        p.y += p.speedY;
-        const lifeRatio = p.life / p.maxLife;
-        p.opacity = lifeRatio < 0.15
-          ? lifeRatio / 0.15
-          : lifeRatio > 0.75
-          ? 1 - (lifeRatio - 0.75) / 0.25
-          : 1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(34,211,238,${p.opacity * 0.45})`;
-        ctx.fill();
-
-        if (p.life >= p.maxLife) {
-          particles.splice(i, 1);
-          spawnParticle();
-        }
-      }
-
-      // Ripple rings from bottom
-      const rippleCount = 3;
-      for (let r = 0; r < rippleCount; r++) {
-        const progress = ((frame * 0.004 + r * 0.33) % 1);
-        const maxR = canvas.width * 0.55;
-        const currentR = progress * maxR;
-        const alpha = (1 - progress) * 0.06;
-        ctx.beginPath();
-        ctx.ellipse(
-          canvas.width / 2,
-          canvas.height * 0.88,
-          currentR,
-          currentR * 0.22,
-          0, 0, Math.PI * 2
-        );
-        ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      raf = requestAnimationFrame(draw);
-    };
-
-    draw();
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-[#020f12] pb-16 px-6 pt-28">
-
-      {/* Hero background image */}
+    <section
+      className="relative min-h-screen overflow-hidden flex flex-col justify-end"
+      style={{ paddingTop: 90, paddingBottom: 44, paddingLeft: 20, paddingRight: 20 }}
+    >
+      {/* ── Background image ── */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero/tigerpraws-hero.jpg"
-          alt=""
+          src="/images/hero/Village-ShrimpPondBG.webp"
+          alt="DAKH Shrimp village pond"
           fill
-          className="object-cover object-center opacity-[0.12] scale-105"
+          className="object-cover object-center"
           priority
-          aria-hidden
+          style={{ filter: "brightness(0.6) saturate(1.05)" }}
         />
       </div>
 
-      {/* Deep atmospheric gradients */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#020f12] via-[#020f12]/85 to-[#020f12]/40 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#020f12]/80 via-transparent to-[#020f12]/60 pointer-events-none" />
-
-      {/* Aqua radial glow — bottom left */}
+      {/* ── Gradient overlays ── */}
+      {/* Bottom dark for text readability */}
       <div
-        className="absolute bottom-0 left-[-10%] w-[70%] h-[60%] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at bottom left, rgba(34,211,238,0.07) 0%, transparent 65%)" }}
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to top, rgba(1,10,26,0.97) 0%, rgba(0,30,70,0.75) 38%, rgba(0,60,120,0.3) 65%, transparent 100%)" }}
       />
-      {/* Gold radial glow — top right */}
+      {/* Left dark for text column */}
       <div
-        className="absolute top-0 right-0 w-[50%] h-[40%] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at top right, rgba(200,148,58,0.05) 0%, transparent 60%)" }}
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(110deg, rgba(1,10,26,0.88) 0%, rgba(1,18,42,0.55) 42%, transparent 72%)" }}
       />
-
-      {/* Fine grid texture */}
+      {/* Aqua glow bottom-left */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(34,211,238,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,1) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
+        className="absolute pointer-events-none"
+        style={{ bottom: "-8%", left: "-4%", width: "55%", height: "50%", background: "radial-gradient(ellipse, rgba(0,180,216,0.14) 0%, transparent 68%)" }}
       />
 
-      {/* Canvas — particles + ripples */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        aria-hidden
-      />
-
-      {/* Shrimp silhouettes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        {/* Large silhouette right */}
-        <svg
-          className="absolute right-[-2%] bottom-[18%] w-48 opacity-[0.04]"
-          viewBox="0 0 200 80"
-          fill="white"
-        >
-          <path d="M10 40 Q30 10 80 20 Q130 30 160 15 Q185 5 195 20 Q185 35 160 30 Q130 45 80 38 Q30 50 10 40Z" />
-          <ellipse cx="8" cy="40" rx="8" ry="5" />
-          <path d="M160 15 L175 2 M165 18 L182 8" stroke="white" strokeWidth="2" fill="none" />
-        </svg>
-        {/* Small silhouette left */}
-        <svg
-          className="absolute left-[5%] top-[35%] w-20 opacity-[0.035] rotate-12"
-          viewBox="0 0 200 80"
-          fill="white"
-        >
-          <path d="M10 40 Q30 10 80 20 Q130 30 160 15 Q185 5 195 20 Q185 35 160 30 Q130 45 80 38 Q30 50 10 40Z" />
-          <ellipse cx="8" cy="40" rx="8" ry="5" />
-        </svg>
-      </div>
-
-      {/* Horizontal wave shimmer lines */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        {[28, 45, 62, 76].map((pct, i) => (
-          <div
+      {/* ── Animated ripple rings ── */}
+      <div className="absolute pointer-events-none" style={{ bottom: "7%", left: "22%" }}>
+        {[3.5, 3.5, 3.5].map((dur, i) => (
+          <span
             key={i}
-            className="absolute left-0 right-0 h-px wave-shimmer"
-            style={{ top: `${pct}%`, animationDelay: `${i * 1.4}s`, opacity: 0.6 }}
+            className="ripple-ring absolute rounded-full"
+            style={{
+              width: 200, height: 50,
+              border: `1px solid rgba(0,180,216,${0.4 - i * 0.12})`,
+              top: -25, left: -100,
+              animationDuration: `${dur}s`,
+              animationDelay: `${i * 1.15}s`,
+            }}
           />
         ))}
       </div>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 max-w-lg">
+      {/* ── Shimmer lines ── */}
+      {[36, 56, 72].map((pct, i) => (
+        <div
+          key={i}
+          className="shimmer-line absolute left-0 right-0 pointer-events-none"
+          style={{ top: `${pct}%`, height: 1, opacity: 0.38 - i * 0.08, animationDelay: `${i * 2}s` }}
+        />
+      ))}
 
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 border border-yellow-500/25 bg-yellow-500/[0.08] text-yellow-400/90 text-[0.65rem] font-semibold uppercase tracking-[0.16em] px-3.5 py-1.5 rounded-full mb-7">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          Farm to Fork · QR Verified · Est. 2026
+      {/* ── Content ── */}
+      <div className="relative z-10" style={{ maxWidth: 560 }}>
+
+        {/* Farm to fork badge */}
+        <div
+          className="inline-flex items-center gap-2 rounded-full mb-5"
+          style={{
+            border: "1px solid rgba(201,168,76,0.45)",
+            background: "rgba(201,168,76,0.09)",
+            color: "#f0c94a",
+            fontSize: "0.62rem",
+            fontWeight: 700,
+            letterSpacing: "0.16em",
+            textTransform: "uppercase",
+            padding: "7px 16px",
+          }}
+        >
+          <span
+            className="rounded-full"
+            style={{ width: 7, height: 7, background: "#00b4d8", animation: "dotPulse 2s infinite", flexShrink: 0, display: "inline-block" }}
+          />
+          Farm to Fork &nbsp;·&nbsp; QR Verified &nbsp;·&nbsp; Est. 2026
         </div>
 
-        {/* Headline */}
-        <h1
-          className="font-black text-white leading-[1.02] mb-6 tracking-tight"
-          style={{ fontSize: "clamp(2.6rem, 10vw, 5rem)", fontFamily: "'Georgia', serif" }}
+        {/* Brand name */}
+        <div
+          className="font-bold text-white mb-1"
+          style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1rem, 3.5vw, 1.4rem)", letterSpacing: "0.06em", color: "rgba(255,255,255,0.6)" }}
         >
-          India's premium<br />
-          <span
-            className="text-transparent bg-clip-text"
-            style={{ backgroundImage: "linear-gradient(90deg, #22d3ee 0%, #67e8f9 50%, #22d3ee 100%)" }}
-          >
-            transparent
-          </span>
+          DAKH Shrimp &amp; Co.
+        </div>
+
+        {/* Main headline */}
+        <h1
+          className="font-black text-white leading-none mb-3"
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "clamp(2.8rem, 11vw, 5.5rem)",
+            letterSpacing: "-0.025em",
+          }}
+        >
+          Global Quality.
           <br />
-          seafood brand.
+          <span
+            style={{
+              background: "linear-gradient(135deg, #c9a84c, #f0c94a, #c9a84c)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Indian Price.
+          </span>
         </h1>
 
-        <p className="text-white/40 text-[0.92rem] leading-[1.75] max-w-sm mb-8 font-light tracking-wide">
-          Every pack of DAKH Shrimps carries a QR code — linked to its harvest pond,
-          lab certificate, and cold chain record. From Andhra's coast to your kitchen.
+        {/* Sub-tagline */}
+        <p
+          className="font-light mb-5"
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontStyle: "italic",
+            fontSize: "clamp(0.92rem, 3.2vw, 1.3rem)",
+            color: "rgba(255,255,255,0.4)",
+          }}
+        >
+          From Andhra&apos;s Coast to Your Kitchen.
         </p>
 
-        {/* Trust microcopy */}
-        <p className="text-cyan-400/50 text-[0.7rem] uppercase tracking-[0.18em] mb-6 font-medium">
-          "Scan Freshness. Taste Trust."
+        {/* ── Five value blocks ── */}
+        <div className="flex gap-3 flex-wrap mb-5">
+          {VALUES.map((v) => (
+            <div
+              key={v.label}
+              className="flex flex-col items-center gap-1.5 text-center"
+              style={{ minWidth: 62 }}
+            >
+              {/* Circle icon */}
+              <div
+                className="flex items-center justify-center rounded-full"
+                style={{
+                  width: 52,
+                  height: 52,
+                  background: "rgba(201,168,76,0.12)",
+                  border: "1.5px solid rgba(201,168,76,0.45)",
+                  color: "#f0c94a",
+                  boxShadow: "0 0 16px rgba(201,168,76,0.15)",
+                }}
+              >
+                {v.icon}
+              </div>
+              {/* Label */}
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.75)",
+                  fontSize: "0.58rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  lineHeight: 1.3,
+                  maxWidth: 64,
+                }}
+              >
+                {v.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Body copy */}
+        <p
+          className="font-light mb-2"
+          style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.86rem", lineHeight: 1.75, maxWidth: 380 }}
+        >
+          Every pack of DAKH Shrimps carries a QR code linked to its harvest pond,
+          lab certificate, and cold chain record. From Andhra&apos;s coast to your kitchen.
+        </p>
+
+        {/* Microcopy */}
+        <p
+          className="font-semibold mb-6"
+          style={{ color: "#48cae4", fontSize: "0.72rem", letterSpacing: "0.12em" }}
+        >
+          &ldquo;Scan Freshness. Taste Trust.&rdquo;
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap gap-3 mb-10">
-          <Link
-            href="#products"
-            className="flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-sm px-6 py-3.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-400/20"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 01-8 0" />
-            </svg>
-            Shop Fresh
-          </Link>
-          <Link
-            href="#trace"
-            className="flex items-center gap-2 border border-white/15 text-white/65 hover:border-cyan-400/40 hover:text-cyan-400 text-sm font-medium px-6 py-3.5 rounded-xl transition-all"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="3" width="5" height="5" /><rect x="16" y="3" width="5" height="5" />
-              <rect x="3" y="16" width="5" height="5" />
-              <path d="M21 16h-3v3M15 21v-3h3M15 12h3v3M12 15v3" />
-            </svg>
-            Trace a Batch
-          </Link>
+        <div className="flex gap-2.5 flex-wrap mb-7">
+          {/* Gold glow button */}
           <a
-            href={`https://wa.me/${WA_NUMBER}?text=Hi%20DAKH%20Shrimps!%20I%27d%20like%20to%20order.`}
+            href="#products"
+            className="relative overflow-hidden inline-flex items-center gap-2 font-black rounded-xl transition-transform hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, #c9a84c, #f0c94a)",
+              color: "#012a4a",
+              fontSize: "0.9rem",
+              padding: "13px 22px",
+              animation: "goldGlow 2.5s ease infinite",
+            }}
+          >
+            🎣 Explore the Catch
+          </a>
+          <a
+            href={`https://wa.me/${WA}?text=Hi%20DAKH%20Shrimp!`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-[#25D366]/10 border border-[#25D366]/25 text-[#25D366] hover:bg-[#25D366]/20 text-sm font-medium px-6 py-3.5 rounded-xl transition-all"
+            className="inline-flex items-center gap-2 font-semibold rounded-xl transition-all"
+            style={{
+              background: "rgba(37,211,102,0.14)",
+              border: "1px solid rgba(37,211,102,0.4)",
+              color: "#25D366",
+              fontSize: "0.9rem",
+              padding: "13px 18px",
+            }}
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
             </svg>
-            WhatsApp Order
+            WhatsApp
+          </a>
+          <a
+            href="#trace"
+            className="inline-flex items-center gap-2 font-medium rounded-xl transition-all"
+            style={{
+              border: "1px solid rgba(255,255,255,0.2)",
+              color: "rgba(255,255,255,0.55)",
+              fontSize: "0.9rem",
+              padding: "13px 18px",
+            }}
+          >
+            🔍 Trace
           </a>
         </div>
 
         {/* Stats */}
-        <div className="flex gap-8 pt-7 border-t border-white/[0.06]">
+        <div
+          className="flex gap-7"
+          style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        >
           {[
-            { n: "3", l: "Shrimp Varieties" },
+            { n: "3", l: "Varieties" },
             { n: "100%", l: "QR Verified" },
+            { n: "AP", l: "Origin" },
             { n: "0–4°C", l: "Cold Chain" },
-            { n: "AP", l: "Andhra Origin" },
           ].map((s) => (
             <div key={s.l}>
               <div
-                className="text-white font-black leading-none"
-                style={{ fontFamily: "'Georgia', serif", fontSize: "1.5rem" }}
+                className="font-black text-white leading-none"
+                style={{ fontFamily: "var(--font-playfair)", fontSize: "1.5rem" }}
               >
                 {s.n}
               </div>
-              <div className="text-white/25 text-[0.6rem] uppercase tracking-[0.1em] mt-1.5 leading-tight">
+              <div
+                style={{ color: "rgba(255,255,255,0.26)", fontSize: "0.55rem", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 4 }}
+              >
                 {s.l}
               </div>
             </div>
@@ -281,22 +313,20 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Logo — desktop right float */}
-      <div className="absolute right-6 bottom-20 hidden lg:block z-10 slow-bob">
+      {/* Logo float — desktop only */}
+      <div
+        className="float-bob absolute hidden lg:block z-10"
+        style={{ right: 32, bottom: 60 }}
+        aria-hidden="true"
+      >
         <Image
           src="/images/logos/Dakhsrimp-logo.png"
-          alt="DAKH Shrimps & Co."
-          width={200}
-          height={200}
-          className="object-contain opacity-80"
-          style={{ filter: "drop-shadow(0 0 40px rgba(34,211,238,0.15))" }}
+          alt=""
+          width={210}
+          height={210}
+          className="object-contain"
+          style={{ filter: "drop-shadow(0 0 50px rgba(0,180,216,0.4))" }}
         />
-      </div>
-
-      {/* Scroll cue */}
-      <div className="absolute bottom-6 right-6 flex flex-col items-center gap-1.5 z-10" aria-hidden>
-        <span className="text-white/15 text-[0.6rem] tracking-[0.12em] uppercase">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-cyan-400/30 to-transparent animate-pulse" />
       </div>
     </section>
   );
