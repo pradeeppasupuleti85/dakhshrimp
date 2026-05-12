@@ -54,8 +54,8 @@ const VALUES = [
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen overflow-hidden flex flex-col justify-end"
-      style={{ paddingTop: 90, paddingBottom: 44, paddingLeft: 20, paddingRight: 20 }}
+      className="relative min-h-screen overflow-hidden flex flex-col justify-center"
+style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }}
     >
       {/* ── Background image ── */}
       <div className="absolute inset-0">
