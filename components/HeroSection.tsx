@@ -220,20 +220,17 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
           ))}
         </div>
 
-        {/* Body copy */}
-        <p
-          className="font-light mb-2"
-          style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.86rem", lineHeight: 1.75, maxWidth: 380 }}
-        >
-          Every pack of DAKH Shrimps carries a QR code linked to its harvest pond,
-          lab certificate, and cold chain record. 
-        </p>
+        {/* Body copy — give more room */}
+<p
+  className="font-light"
+  style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.86rem", lineHeight: 1.85, maxWidth: 400, marginBottom: 16 }}
+>
 
-        {/* Microcopy */}
-        <p
-          className="font-semibold mb-6"
-          style={{ color: "#48cae4", fontSize: "0.72rem", letterSpacing: "0.12em" }}
-        >
+{/* Microcopy — breathe */}
+<p
+  className="font-semibold"
+  style={{ color: "#48cae4", fontSize: "0.72rem", letterSpacing: "0.12em", marginTop: 0, marginBottom: 24 }}
+>
           &ldquo;Scan Freshness. Taste Trust.&rdquo;
         </p>
 
