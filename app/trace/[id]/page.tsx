@@ -183,7 +183,7 @@ export default async function TracePage({
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
         <Link
-          href="/"
+          href="/#products"
           style={{
             display: "flex", alignItems: "center", gap: 6,
             color: "rgba(1,42,74,0.45)", fontSize: "0.76rem",
