@@ -46,7 +46,7 @@ function Row({ label, value, mono = false, accent = false }: {
       </span>
       <span style={{
         textAlign: "right", fontSize: "0.78rem", fontWeight: 600,
-        maxWidth: "58%", wordBreak: "break-words", lineHeight: 1.4,
+        maxWidth: "58%", wordBreak: "break-word", lineHeight: 1.4,
         fontFamily: mono ? "monospace" : "inherit",
         color: accent ? "#0096c7" : "#012a4a",
       }}>
