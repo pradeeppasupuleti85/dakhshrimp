@@ -5,40 +5,41 @@ const WA = "919999999999";
 
 const VALUES = [
   {
+    label: "Premium\nQuality",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    label: "Premium Quality",
   },
   {
+    label: "Fresh &\nHygienic",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" />
-        <path d="M12 6v6l4 2" />
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v4l3 3" />
       </svg>
     ),
-    label: "Fresh & Hygienic",
   },
   {
+    label: "Sustainable\nFarming",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
       </svg>
     ),
-    label: "Sustainable Farming",
   },
   {
+    label: "Lab\nCertified",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
       </svg>
     ),
-    label: "Lab Certified",
   },
   {
+    label: "QR\nTraceability",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <rect x="3" y="3" width="5" height="5" />
@@ -47,78 +48,98 @@ const VALUES = [
         <path d="M21 16h-3v3M15 21v-3h3M15 12h3v3M12 15v3" />
       </svg>
     ),
-    label: "QR Traceability",
   },
 ];
+
+const DELAYS = ["0s", "0.2s", "0.4s", "0.6s", "0.8s"];
 
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen overflow-hidden flex flex-col justify-center"
-style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }}
+      style={{
+        position: "relative",
+        minHeight: "100svh",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingTop: 110,
+        paddingBottom: 60,
+        paddingLeft: 20,
+        paddingRight: 20,
+      }}
     >
-      {/* ── Background image ── */}
-      <div className="absolute inset-0">
+      {/* Background image */}
+      <div style={{ position: "absolute", inset: 0 }}>
         <Image
           src="/images/hero/Village-ShrimpPondBG.webp"
           alt="DAKH Shrimp village pond"
           fill
           className="object-cover object-center"
           priority
-          style={{ filter: "brightness(0.6) saturate(1.05)" }}
+          style={{ filter: "brightness(0.58) saturate(1.05)" }}
         />
       </div>
 
-      {/* ── Gradient overlays ── */}
-      {/* Bottom dark for text readability */}
+      {/* Gradient overlays */}
       <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(to top, rgba(1,10,26,0.97) 0%, rgba(0,30,70,0.75) 38%, rgba(0,60,120,0.3) 65%, transparent 100%)" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to top, rgba(1,10,26,0.97) 0%, rgba(0,30,70,0.78) 38%, rgba(0,60,120,0.3) 65%, transparent 100%)",
+        }}
       />
-      {/* Left dark for text column */}
       <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(110deg, rgba(1,10,26,0.88) 0%, rgba(1,18,42,0.55) 42%, transparent 72%)" }}
-      />
-      {/* Aqua glow bottom-left */}
-      <div
-        className="absolute pointer-events-none"
-        style={{ bottom: "-8%", left: "-4%", width: "55%", height: "50%", background: "radial-gradient(ellipse, rgba(0,180,216,0.14) 0%, transparent 68%)" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(110deg, rgba(1,10,26,0.9) 0%, rgba(1,18,42,0.58) 42%, transparent 72%)",
+        }}
       />
 
-      {/* ── Animated ripple rings ── */}
-      <div className="absolute pointer-events-none" style={{ bottom: "7%", left: "22%" }}>
-        {[3.5, 3.5, 3.5].map((dur, i) => (
-          <span
-            key={i}
-            className="ripple-ring absolute rounded-full"
-            style={{
-              width: 200, height: 50,
-              border: `1px solid rgba(0,180,216,${0.4 - i * 0.12})`,
-              top: -25, left: -100,
-              animationDuration: `${dur}s`,
-              animationDelay: `${i * 1.15}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Aqua glow */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-8%",
+          left: "-4%",
+          width: "55%",
+          height: "50%",
+          background:
+            "radial-gradient(ellipse, rgba(0,180,216,0.14) 0%, transparent 68%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      {/* ── Shimmer lines ── */}
+      {/* Shimmer lines */}
       {[36, 56, 72].map((pct, i) => (
         <div
           key={i}
-          className="shimmer-line absolute left-0 right-0 pointer-events-none"
-          style={{ top: `${pct}%`, height: 1, opacity: 0.38 - i * 0.08, animationDelay: `${i * 2}s` }}
+          className="shimmer-line"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: `${pct}%`,
+            height: 1,
+            opacity: 0.35 - i * 0.08,
+            animationDelay: `${i * 2}s`,
+            pointerEvents: "none",
+          }}
         />
       ))}
 
       {/* ── Content ── */}
-      <div className="relative z-10" style={{ maxWidth: 560 }}>
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 600 }}>
 
-        {/* Farm to fork badge */}
+        {/* Badge */}
         <div
-          className="inline-flex items-center gap-2 rounded-full mb-5"
           style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
             border: "1px solid rgba(201,168,76,0.45)",
             background: "rgba(201,168,76,0.09)",
             color: "#f0c94a",
@@ -127,30 +148,48 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
             letterSpacing: "0.16em",
             textTransform: "uppercase",
             padding: "7px 16px",
+            borderRadius: 999,
+            marginBottom: 20,
           }}
         >
           <span
-            className="rounded-full"
-            style={{ width: 7, height: 7, background: "#00b4d8", animation: "dotPulse 2s infinite", flexShrink: 0, display: "inline-block" }}
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: "50%",
+              background: "#00b4d8",
+              animation: "dotPulse 2s infinite",
+              flexShrink: 0,
+              display: "inline-block",
+            }}
           />
           Farm to Fork &nbsp;·&nbsp; QR Verified &nbsp;·&nbsp; Est. 2026
         </div>
 
         {/* Brand name */}
         <div
-          className="font-bold text-white mb-1"
-          style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(1rem, 3.5vw, 1.4rem)", letterSpacing: "0.06em", color: "rgba(255,255,255,0.6)" }}
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "clamp(0.9rem, 3vw, 1.3rem)",
+            fontWeight: 700,
+            color: "rgba(255,255,255,0.55)",
+            letterSpacing: "0.06em",
+            marginBottom: 8,
+          }}
         >
           DAKH Shrimp &amp; Co.
         </div>
 
-        {/* Main headline */}
+        {/* Headline */}
         <h1
-          className="font-black text-white leading-none mb-3"
           style={{
             fontFamily: "var(--font-playfair)",
-            fontSize: "clamp(2.8rem, 11vw, 5.5rem)",
+            fontSize: "clamp(2.8rem, 10vw, 5.5rem)",
+            fontWeight: 900,
+            color: "white",
+            lineHeight: 1.0,
             letterSpacing: "-0.025em",
+            marginBottom: 10,
           }}
         >
           Global Quality.
@@ -167,51 +206,68 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
           </span>
         </h1>
 
-        {/* Sub-tagline */}
+        {/* Tagline */}
         <p
-          className="font-light mb-5"
           style={{
             fontFamily: "var(--font-playfair)",
             fontStyle: "italic",
-            fontSize: "clamp(0.92rem, 3.2vw, 1.3rem)",
+            fontSize: "clamp(0.9rem, 3vw, 1.25rem)",
             color: "rgba(255,255,255,0.4)",
+            marginBottom: 28,
           }}
         >
           From Andhra&apos;s Coast to Your Kitchen.
         </p>
 
-        {/* ── Five value blocks ── */}
-        <div className="flex gap-3 flex-wrap mb-5">
-          {VALUES.map((v) => (
+        {/* 5 Value icons */}
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            flexWrap: "wrap",
+            marginBottom: 28,
+          }}
+        >
+          {VALUES.map((v, i) => (
             <div
-              key={v.label}
-              className="flex flex-col items-center gap-1.5 text-center"
-              style={{ minWidth: 62 }}
+              key={i}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 6,
+                minWidth: 56,
+              }}
             >
-              {/* Circle icon */}
               <div
-                className="flex items-center justify-center rounded-full"
                 style={{
                   width: 52,
                   height: 52,
+                  borderRadius: "50%",
                   background: "rgba(201,168,76,0.12)",
                   border: "1.5px solid rgba(201,168,76,0.45)",
                   color: "#f0c94a",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   boxShadow: "0 0 16px rgba(201,168,76,0.15)",
+                  animation: "iconPulse 2s ease-in-out infinite",
+                  animationDelay: DELAYS[i],
                 }}
               >
                 {v.icon}
               </div>
-              {/* Label */}
               <span
                 style={{
-                  color: "rgba(255,255,255,0.75)",
-                  fontSize: "0.58rem",
+                  color: "rgba(255,255,255,0.72)",
+                  fontSize: "0.56rem",
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: "0.06em",
-                  lineHeight: 1.3,
+                  lineHeight: 1.35,
+                  textAlign: "center",
                   maxWidth: 64,
+                  whiteSpace: "pre-line",
                 }}
               >
                 {v.label}
@@ -220,47 +276,72 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
           ))}
         </div>
 
-        {/* Body copy — give more room */}
-<p
-  className="font-light"
-  style={{ color: "rgba(255,255,255,0.42)", fontSize: "0.86rem", lineHeight: 1.85, maxWidth: 400, marginBottom: 16 }}
->
+        {/* Body copy */}
+        <p
+          style={{
+            color: "rgba(255,255,255,0.42)",
+            fontSize: "0.86rem",
+            lineHeight: 1.85,
+            maxWidth: 400,
+            marginBottom: 10,
+            fontWeight: 300,
+          }}
+        >
+          Every pack of DAKH Shrimps carries a QR code linked to its harvest
+          pond, lab certificate, and cold chain record. From Andhra&apos;s
+          coast to your kitchen.
+        </p>
 
-{/* Microcopy — breathe */}
-<p
-  className="font-semibold"
-  style={{ color: "#48cae4", fontSize: "0.72rem", letterSpacing: "0.12em", marginTop: 0, marginBottom: 24 }}
->
+        {/* Microcopy */}
+        <p
+          style={{
+            color: "#48cae4",
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            marginBottom: 28,
+          }}
+        >
           &ldquo;Scan Freshness. Taste Trust.&rdquo;
         </p>
 
         {/* CTAs */}
-        <div className="flex gap-2.5 flex-wrap mb-7">
-          {/* Gold glow button */}
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 32 }}>
           <a
             href="#products"
-            className="relative overflow-hidden inline-flex items-center gap-2 font-black rounded-xl transition-transform hover:-translate-y-0.5"
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
               background: "linear-gradient(135deg, #c9a84c, #f0c94a)",
               color: "#012a4a",
+              fontWeight: 900,
               fontSize: "0.9rem",
               padding: "13px 22px",
+              borderRadius: 14,
+              textDecoration: "none",
               animation: "goldGlow 2.5s ease infinite",
             }}
           >
             🎣 Explore the Catch
           </a>
+
           <a
             href={`https://wa.me/${WA}?text=Hi%20DAKH%20Shrimp!`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-semibold rounded-xl transition-all"
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
               background: "rgba(37,211,102,0.14)",
               border: "1px solid rgba(37,211,102,0.4)",
               color: "#25D366",
+              fontWeight: 600,
               fontSize: "0.9rem",
               padding: "13px 18px",
+              borderRadius: 14,
+              textDecoration: "none",
             }}
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -268,14 +349,20 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
             </svg>
             WhatsApp
           </a>
+
           <a
             href="#trace"
-            className="inline-flex items-center gap-2 font-medium rounded-xl transition-all"
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
               border: "1px solid rgba(255,255,255,0.2)",
               color: "rgba(255,255,255,0.55)",
+              fontWeight: 500,
               fontSize: "0.9rem",
               padding: "13px 18px",
+              borderRadius: 14,
+              textDecoration: "none",
             }}
           >
             🔍 Trace
@@ -284,8 +371,12 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
 
         {/* Stats */}
         <div
-          className="flex gap-7"
-          style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          style={{
+            display: "flex",
+            gap: 32,
+            paddingTop: 20,
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+          }}
         >
           {[
             { n: "3", l: "Varieties" },
@@ -295,13 +386,24 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
           ].map((s) => (
             <div key={s.l}>
               <div
-                className="font-black text-white leading-none"
-                style={{ fontFamily: "var(--font-playfair)", fontSize: "1.5rem" }}
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  color: "white",
+                  fontSize: "1.5rem",
+                  fontWeight: 800,
+                  lineHeight: 1,
+                }}
               >
                 {s.n}
               </div>
               <div
-                style={{ color: "rgba(255,255,255,0.26)", fontSize: "0.55rem", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 4 }}
+                style={{
+                  color: "rgba(255,255,255,0.26)",
+                  fontSize: "0.55rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  marginTop: 4,
+                }}
               >
                 {s.l}
               </div>
@@ -309,7 +411,6 @@ style={{ paddingTop: 110, paddingBottom: 60, paddingLeft: 20, paddingRight: 20 }
           ))}
         </div>
       </div>
-
-     </section>
+    </section>
   );
 }
