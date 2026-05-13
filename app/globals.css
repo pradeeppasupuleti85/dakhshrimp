@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* ── Fonts ── */
 @font-face {
   font-family: "Sora";
   src: url("/Sora-ExtraBold.ttf") format("truetype");
@@ -9,7 +8,6 @@
   font-display: swap;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -20,14 +18,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Ribbon ── */
 @keyframes ribbonScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 .animate-ribbon { animation: ribbonScroll 26s linear infinite; }
 
-/* ── Shimmer wave ── */
 @keyframes shimmerWave {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
@@ -38,51 +34,40 @@ body {
   animation: shimmerWave 5s ease infinite;
 }
 
-/* ── Ripple rings ── */
-@keyframes rippleOut {
-  0%   { transform: scale(0.3); opacity: 0.65; }
-  100% { transform: scale(3.8); opacity: 0; }
-}
-.ripple-ring { animation: rippleOut ease-out infinite; }
-
-/* ── Float bob ── */
 @keyframes floatBob {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-9px); }
 }
 .float-bob { animation: floatBob 5s ease-in-out infinite; }
 
-/* ── Gold glow pulse ── */
 @keyframes goldGlow {
   0%, 100% { box-shadow: 0 5px 18px rgba(201,168,76,0.45), 0 0 0 0 rgba(201,168,76,0); }
   50%       { box-shadow: 0 8px 30px rgba(201,168,76,0.7),  0 0 24px 6px rgba(201,168,76,0.18); }
 }
 
-/* ── Sparkle ── */
-@keyframes sparkle {
-  0%   { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-30px) scale(0); opacity: 0; }
-}
-
-/* ── Pop in ── */
-@keyframes popIn {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-
-/* ── Dot pulse ── */
 @keyframes dotPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: .4; transform: scale(1.5); }
 }
 
-/* ── Scroll reveal ── */
-.reveal {
-  opacity: 1;
-  transform: none;
+@keyframes iconPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 16px rgba(201,168,76,0.15);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 0 28px rgba(201,168,76,0.38);
+  }
 }
 
-/* ── Weight pill ── */
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.reveal { opacity: 1; transform: none; }
+
 .wpill {
   border: 1.5px solid rgba(0,150,200,0.35);
   color: #0096c7;
@@ -106,7 +91,6 @@ body {
   color: #00b4d8;
 }
 
-/* ── Floating WA ── */
 .wa-float {
   position: fixed;
   bottom: 22px;
@@ -126,7 +110,6 @@ body {
 }
 .wa-float:hover { transform: scale(1.1); }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #dff0fa; }
 ::-webkit-scrollbar-thumb { background: #00b4d8; border-radius: 3px; }
