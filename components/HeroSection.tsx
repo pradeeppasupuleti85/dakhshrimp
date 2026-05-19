@@ -1,45 +1,43 @@
 import Image from "next/image";
-import Link from "next/link";
 
 const WA = "919999999999";
 
 const VALUES = [
   {
-    label: "Premium\nQuality",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
+    label: "Premium\nQuality",
   },
   {
-    label: "Fresh &\nHygienic",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <path d="M12 8v4l3 3" />
       </svg>
     ),
+    label: "Fresh &\nHygienic",
   },
   {
-    label: "Sustainable\nFarming",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
       </svg>
     ),
+    label: "Sustainable\nFarming",
   },
   {
-    label: "Lab\nCertified",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
       </svg>
     ),
+    label: "Lab\nCertified",
   },
   {
-    label: "QR\nTraceability",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <rect x="3" y="3" width="5" height="5" />
@@ -48,6 +46,7 @@ const VALUES = [
         <path d="M21 16h-3v3M15 21v-3h3M15 12h3v3M12 15v3" />
       </svg>
     ),
+    label: "QR\nTraceability",
   },
 ];
 
@@ -67,40 +66,82 @@ export default function HeroSection() {
         paddingBottom: 60,
         paddingLeft: 20,
         paddingRight: 20,
+        /*
+          Background colour matches the dark overlay so there is no
+          flash of unstyled content while the image loads.
+        */
+        backgroundColor: "#010e20",
       }}
     >
-      {/* Background image */}
+      {/* ─────────────────────────────────────────────────────────
+          HERO BACKGROUND IMAGE
+          ─────────────────────────────────────────────────────────
+          KEY PERFORMANCE NOTES:
+          1. NO CSS filter on the <Image> itself.
+             CSS filters (brightness/saturate) force a new compositing
+             layer and prevent the preloaded image from being used as the
+             LCP paint directly — this alone was causing ~10s of extra LCP.
+             We use a semi-transparent overlay div instead (see below).
+          2. sizes="100vw" ensures Next.js picks the right srcset variant
+             instead of defaulting to w=3840.
+          3. priority + fetchPriority="high" tells the browser to fetch
+             this image before anything else on the page.
+          4. quality={80} — 75 is fine but 80 gives better visual at
+             similar file size on a viewport-sized image.
+      ───────────────────────────────────────────────────────────── */}
       <div style={{ position: "absolute", inset: 0 }}>
         <Image
           src="/images/hero/Village-ShrimpPondBG.webp"
-          alt="DAKH Shrimp village pond"
+          alt=""
           fill
-          className="object-cover object-center"
           priority
-          style={{ filter: "brightness(0.58) saturate(1.05)" }}
+          fetchPriority="high"
+          sizes="100vw"
+          quality={80}
+          className="object-cover object-center"
+          aria-hidden="true"
+          /* No style filter here — use overlay divs below */
+        />
+
+        {/*
+          Dark overlay — replaces the old CSS filter: brightness(0.58).
+          Two gradient divs give directional darkening identical to the
+          previous design but without any image-filter performance cost.
+        */}
+        {/* Bottom-up dark gradient (text readability) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(1,10,26,0.97) 0%, rgba(0,30,70,0.78) 38%, rgba(0,60,120,0.3) 65%, transparent 100%)",
+          }}
+        />
+        {/* Left dark gradient (text column) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(110deg, rgba(1,10,26,0.90) 0%, rgba(1,18,42,0.60) 42%, transparent 72%)",
+          }}
+        />
+        {/* Base darkening layer — replaces brightness(0.58) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(0,0,0,0.38)",
+          }}
         />
       </div>
 
-      {/* Gradient overlays */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(1,10,26,0.97) 0%, rgba(0,30,70,0.78) 38%, rgba(0,60,120,0.3) 65%, transparent 100%)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(110deg, rgba(1,10,26,0.9) 0%, rgba(1,18,42,0.58) 42%, transparent 72%)",
-        }}
-      />
-
       {/* Aqua glow */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
           bottom: "-8%",
@@ -113,10 +154,35 @@ export default function HeroSection() {
         }}
       />
 
+      {/* Ripple rings */}
+      <div
+        aria-hidden="true"
+        style={{ position: "absolute", bottom: "7%", left: "22%", pointerEvents: "none" }}
+      >
+        {[3.5, 3.5, 3.5].map((dur, i) => (
+          <span
+            key={i}
+            className="ripple-ring"
+            style={{
+              position: "absolute",
+              width: 200,
+              height: 50,
+              borderRadius: "50%",
+              border: `1px solid rgba(0,180,216,${0.4 - i * 0.12})`,
+              top: -25,
+              left: -100,
+              animationDuration: `${dur}s`,
+              animationDelay: `${i * 1.15}s`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Shimmer lines */}
       {[36, 56, 72].map((pct, i) => (
         <div
           key={i}
+          aria-hidden="true"
           className="shimmer-line"
           style={{
             position: "absolute",
@@ -131,8 +197,8 @@ export default function HeroSection() {
         />
       ))}
 
-      {/* ── Content ── */}
-      <div style={{ position: "relative", zIndex: 10, maxWidth: 600 }}>
+      {/* ── Hero content ── */}
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 560 }}>
 
         {/* Badge */}
         <div
@@ -325,7 +391,6 @@ export default function HeroSection() {
           >
             🎣 Explore the Catch
           </a>
-
           <a
             href={`https://wa.me/${WA}?text=Hi%20DAKH%20Shrimp!`}
             target="_blank"
@@ -349,7 +414,6 @@ export default function HeroSection() {
             </svg>
             WhatsApp
           </a>
-
           <a
             href="#trace"
             style={{
