@@ -48,9 +48,9 @@ export default function ProductCard({
   const selected = weights[selectedIdx];
 
   const accent = {
-    aqua:    { hex: "#00b4d8", rgb: "0,180,216",   badge: "background:#00b4d8;color:white;" },
-    gold:    { hex: "#c9a84c", rgb: "201,168,76",  badge: "background:linear-gradient(135deg,#c9a84c,#f0c94a);color:#012a4a;" },
-    emerald: { hex: "#10b981", rgb: "16,185,129",  badge: "background:#10b981;color:white;" },
+    aqua: { hex: "#00b4d8", rgb: "0,180,216", badge: "background:#00b4d8;color:white;" },
+    gold: { hex: "#c9a84c", rgb: "201,168,76", badge: "background:linear-gradient(135deg,#c9a84c,#f0c94a);color:#012a4a;" },
+    emerald: { hex: "#10b981", rgb: "16,185,129", badge: "background:#10b981;color:white;" },
   }[accentColor];
 
   const waMsg = encodeURIComponent(
@@ -59,22 +59,12 @@ export default function ProductCard({
 
   return (
     <div
-      className="group reveal"
       style={{
         background: "white",
         borderRadius: 22,
         overflow: "hidden",
         border: `1px solid rgba(${accent.rgb},0.15)`,
         boxShadow: "0 4px 20px rgba(0,150,200,0.09)",
-        transition: "transform .28s, box-shadow .28s",
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 18px 50px rgba(0,150,200,0.2)";
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(0,150,200,0.09)";
       }}
     >
       {/* Image */}
@@ -83,8 +73,17 @@ export default function ProductCard({
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          /*
+            sizes tells Next.js the rendered width of this image.
+            The card is max ~480px wide (max-width container) on mobile,
+            and on desktop it's still single-column ≤480px.
+            Without this, Next.js serves w=3840 (4K) for every product image.
+          */
+          sizes="(max-width: 640px) 100vw, 480px"
+          quality={75}
+          className="object-cover"
+          style={{ transition: "transform 0.5s ease" }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(1,42,74,0.72) 0%,transparent 55%)" }} />
 
@@ -94,16 +93,18 @@ export default function ProductCard({
             position: "absolute", top: 12, left: 12,
             fontSize: "0.6rem", fontWeight: 800, textTransform: "uppercase",
             letterSpacing: "0.08em", padding: "4px 12px", borderRadius: 999,
-            ...Object.fromEntries(accent.badge.split(";").filter(Boolean).map(s => {
-              const [k, v] = s.split(":");
-              return [k.trim().replace(/-([a-z])/g, (_, c) => c.toUpperCase()), v.trim()];
-            })),
+            background: accentColor === "gold"
+              ? "linear-gradient(135deg,#c9a84c,#f0c94a)"
+              : accentColor === "emerald"
+              ? "#10b981"
+              : "#00b4d8",
+            color: accentColor === "gold" ? "#012a4a" : "white",
           }}
         >
           {badge}
         </span>
 
-        {/* QR verified badge */}
+        {/* QR badge */}
         <div
           style={{
             position: "absolute", top: 12, right: 12,
@@ -122,7 +123,7 @@ export default function ProductCard({
           </span>
         </div>
 
-        {/* Cold chain badge */}
+        {/* Cold chain */}
         <div
           style={{
             position: "absolute", bottom: 12, left: 12,
@@ -161,15 +162,11 @@ export default function ProductCard({
             <button
               key={w.weight}
               className="wpill"
-              style={i === selectedIdx ? {
-                background: accent.hex,
-                borderColor: accent.hex,
-                color: "white",
-                boxShadow: `0 3px 12px rgba(${accent.rgb},0.35)`,
-              } : {
-                borderColor: `rgba(${accent.rgb},0.35)`,
-                color: accent.hex,
-              }}
+              style={
+                i === selectedIdx
+                  ? { background: accent.hex, borderColor: accent.hex, color: "white", boxShadow: `0 3px 12px rgba(${accent.rgb},0.35)` }
+                  : { borderColor: `rgba(${accent.rgb},0.35)`, color: accent.hex }
+              }
               onClick={() => setSelectedIdx(i)}
             >
               {w.weight}
@@ -178,14 +175,7 @@ export default function ProductCard({
         </div>
 
         {/* Price strip */}
-        <div
-          style={{
-            display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-            padding: "12px 0", marginBottom: 12,
-            borderTop: "1px solid rgba(0,150,200,0.1)",
-            borderBottom: "1px solid rgba(0,150,200,0.1)",
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", padding: "12px 0", marginBottom: 12, borderTop: "1px solid rgba(0,150,200,0.1)", borderBottom: "1px solid rgba(0,150,200,0.1)" }}>
           <div>
             <div style={{ fontFamily: "var(--font-playfair)", fontSize: "1.9rem", fontWeight: 800, color: accent.hex, lineHeight: 1 }}>
               ₹{selected.price.toLocaleString("en-IN")}
@@ -198,7 +188,7 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* Mini QR strip */}
+        {/* QR strip */}
         <div
           style={{
             display: "flex", alignItems: "center", gap: 10,
@@ -245,10 +235,7 @@ export default function ProductCard({
             background: "#25D366", color: "white", fontWeight: 700, fontSize: "0.84rem",
             padding: 14, borderRadius: 13, width: "100%", textDecoration: "none",
             boxShadow: "0 4px 16px rgba(37,211,102,0.25)",
-            transition: "opacity .18s",
           }}
-          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.9")}
-          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
         >
           {WA_ICON} Order on WhatsApp
         </a>
