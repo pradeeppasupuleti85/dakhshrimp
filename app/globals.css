@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Sora";
-  src: url("/Sora-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -18,124 +10,182 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── RIBBON ── */
+/* ── Ribbon ── */
 @keyframes ribbonScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 .animate-ribbon { animation: ribbonScroll 26s linear infinite; }
 
-/* ── SHIMMER ── */
+/* ── Shimmer ── */
 @keyframes shimmerWave {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
 }
 .shimmer-line {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   background-size: 200% 100%;
-  animation: shimmerWave 5s ease infinite;
+  animation: shimmerWave 6s ease infinite;
 }
 
-/* ── FLOAT BOB ── */
+/* ── Float bob ── */
 @keyframes floatBob {
-  0%, 100% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-9px); }
 }
 .float-bob { animation: floatBob 5s ease-in-out infinite; }
 
-/* ── GOLD GLOW ── */
+/* ── Gold glow (CTA button) ── */
 @keyframes goldGlow {
-  0%, 100% { box-shadow: 0 5px 18px rgba(201,168,76,0.45), 0 0 0 0 rgba(201,168,76,0); }
+  0%, 100% { box-shadow: 0 5px 18px rgba(201,168,76,0.45); }
   50%       { box-shadow: 0 8px 30px rgba(201,168,76,0.7), 0 0 24px 6px rgba(201,168,76,0.18); }
 }
 
-/* ── DOT PULSE ── */
+/* ── Dot pulse (badge) ── */
 @keyframes dotPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: .4; transform: scale(1.5); }
+  50%       { opacity: .38; transform: scale(1.5); }
 }
 
-/* ── ICON PULSE (trust icons base float) ── */
+/* ── Trust icon float ── */
 @keyframes iconPulse {
-  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 0 16px rgba(201,168,76,0.15); }
-  50%       { transform: translateY(-4px) scale(1.06); box-shadow: 0 0 28px rgba(201,168,76,0.38); }
+  0%, 100% { transform: translateY(0) scale(1);   box-shadow: 0 0 14px rgba(201,168,76,0.14); }
+  50%       { transform: translateY(-5px) scale(1.07); box-shadow: 0 0 26px rgba(201,168,76,0.36); }
 }
 
-/* ── POP IN ── */
+/* ── Trust card entrance ── */
+@keyframes trustCardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.trust-card-enter { animation: trustCardIn 0.22s cubic-bezier(0.23,1,0.32,1) both; }
+
+/* ── Pop-in ── */
 @keyframes popIn {
   from { transform: scale(0); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
 }
 
-/* ────────────────────────────────────────────────
-   AMBIENT HERO MOTION — all GPU-only (transform + opacity)
-   zero layout impact, zero extra network requests
-   ──────────────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   AQUACULTURE POND AMBIENT MOTION
+   All animations use transform + opacity only.
+   GPU-composited: zero layout cost, zero network cost.
+   ════════════════════════════════════════════════════════ */
 
-/* Morning mist — two slow drifting gradient clouds */
-@keyframes mistDrift {
-  0%   { transform: translateX(-6%) translateY(0%);  opacity: 0.10; }
-  50%  { transform: translateX( 6%) translateY(-4%); opacity: 0.18; }
-  100% { transform: translateX(-6%) translateY(0%);  opacity: 0.10; }
+/* ── MORNING MIST — slow atmospheric drift ── */
+@keyframes mistA {
+  0%   { transform: translateX(-8%) translateY(0%); opacity: 0.08; }
+  40%  { opacity: 0.16; }
+  60%  { transform: translateX( 8%) translateY(-5%); opacity: 0.12; }
+  100% { transform: translateX(-8%) translateY(0%); opacity: 0.08; }
 }
-@keyframes mistDrift2 {
-  0%   { transform: translateX( 4%) translateY(0%);  opacity: 0.08; }
-  50%  { transform: translateX(-5%) translateY(-6%); opacity: 0.14; }
-  100% { transform: translateX( 4%) translateY(0%);  opacity: 0.08; }
+@keyframes mistB {
+  0%   { transform: translateX( 5%) translateY( 3%); opacity: 0.06; }
+  50%  { transform: translateX(-7%) translateY(-4%); opacity: 0.13; }
+  100% { transform: translateX( 5%) translateY( 3%); opacity: 0.06; }
 }
-.hero-mist-1 { animation: mistDrift  22s ease-in-out infinite; }
-.hero-mist-2 { animation: mistDrift2 28s ease-in-out infinite; }
+.pond-mist-a { animation: mistA 26s ease-in-out infinite; }
+.pond-mist-b { animation: mistB 34s ease-in-out infinite; }
 
-/* Water surface light rays — horizontal streaks moving upward */
-@keyframes waterRay {
-  0%   { transform: translateY(0)   scaleX(1);    opacity: 0; }
-  10%  { opacity: 0.22; }
-  90%  { opacity: 0.16; }
-  100% { transform: translateY(-60px) scaleX(1.3); opacity: 0; }
-}
-.water-ray { animation: waterRay linear infinite; }
-
-/* Ripple ring — realistic water ellipse */
-@keyframes rippleWater {
-  0%   { transform: scale(0.15) scaleY(0.35); opacity: 0.65; }
-  100% { transform: scale(4.2)  scaleY(0.35); opacity: 0; }
-}
-.ripple-ring { animation: rippleWater ease-out infinite; }
-
-/* Paddle wheel rotation — slow, steady */
+/* ── PADDLE WHEEL — authentic shaft rotation ── */
 @keyframes paddleSpin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-.paddle-spin { animation: paddleSpin 8s linear infinite; }
+.paddle-wheel-fast   { animation: paddleSpin  7s linear infinite; }
+.paddle-wheel-medium { animation: paddleSpin 10s linear infinite; }
+.paddle-wheel-slow   { animation: paddleSpin 14s linear infinite; }
 
-/* Shrimp splash — leaps every 9 s, stays invisible between leaps */
-@keyframes shrimpLeap {
-  0%, 80%, 100% { transform: translateY(0) rotate(0deg)   scaleX(1); opacity: 0; }
-  83%            { transform: translateY(-22px) rotate(-25deg) scaleX(1); opacity: 0.55; }
-  87%            { transform: translateY(-42px) rotate(15deg)  scaleX(-1); opacity: 0.75; }
-  92%            { transform: translateY(-18px) rotate(5deg)   scaleX(1); opacity: 0.45; }
-  96%            { transform: translateY(0) rotate(0deg)   scaleX(1); opacity: 0; }
+/* ── AERATOR SPRAY — foam particles fly sideways ── */
+/* Left spray */
+@keyframes sprayLeft {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.55; }
+  100% { transform: translate(-28px, -8px) scale(0.3); opacity: 0; }
 }
-.shrimp-leap { animation: shrimpLeap 9s ease-in-out infinite; }
+/* Right spray */
+@keyframes sprayRight {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.55; }
+  100% { transform: translate( 28px, -8px) scale(0.3); opacity: 0; }
+}
+.spray-l { animation: sprayLeft  linear infinite; }
+.spray-r { animation: sprayRight linear infinite; }
 
-/* Water sparkles — tiny light glints */
-@keyframes sparkleGlint {
+/* ── POND RIPPLE — elongated ellipses from aerator ── */
+@keyframes pondRipple {
+  0%   { transform: scale(0.12) scaleY(0.28); opacity: 0.7; }
+  100% { transform: scale(5.0)  scaleY(0.28); opacity: 0; }
+}
+.pond-ripple { animation: pondRipple ease-out infinite; }
+
+/* ── WATER CAUSTICS — light shimmer on surface ── */
+@keyframes causticDrift {
+  0%   { transform: translateX(-100%) scaleX(1);   opacity: 0; }
+  8%   { opacity: 0.18; }
+  92%  { opacity: 0.12; }
+  100% { transform: translateX(200%)  scaleX(1.4); opacity: 0; }
+}
+.caustic-ray { animation: causticDrift linear infinite; }
+
+/* ── WATER SURFACE GLINT — tiny light specks ── */
+@keyframes glintPulse {
   0%, 100% { opacity: 0; transform: scale(0.5); }
-  50%       { opacity: 0.7; transform: scale(1.2); }
+  50%       { opacity: 0.65; transform: scale(1.3); }
 }
-.water-sparkle { animation: sparkleGlint ease-in-out infinite; }
+.water-glint { animation: glintPulse ease-in-out infinite; }
 
-/* Trust card entrance */
-@keyframes trustCardIn {
-  from { opacity: 0; transform: translateY(8px) scale(0.95); }
-  to   { opacity: 1; transform: translateY(0)  scale(1); }
+/* ── SHRIMP LEAP — rare, cinematic, natural arc ── */
+/* The animation is 18 s total.
+   The shrimp is invisible for ~80% of the cycle.
+   It leaps, arcs naturally (approximated parabola), then splashes.        */
+@keyframes shrimpArc {
+  /* resting underwater — invisible */
+  0%, 76%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  /* breaking the surface — appears */
+  78% {
+    transform: translate(6px, -12px) rotate(-35deg);
+    opacity: 0.35;
+  }
+  /* rising — apex approach */
+  81% {
+    transform: translate(16px, -44px) rotate(-18deg);
+    opacity: 0.82;
+  }
+  /* apex — max height */
+  84% {
+    transform: translate(26px, -58px) rotate(0deg);
+    opacity: 0.9;
+  }
+  /* descending — gravity takes over */
+  87% {
+    transform: translate(36px, -38px) rotate(22deg);
+    opacity: 0.75;
+  }
+  /* re-entry angle */
+  90% {
+    transform: translate(42px, -14px) rotate(45deg);
+    opacity: 0.45;
+  }
+  /* splash — disappears below surface */
+  93% {
+    transform: translate(44px, 4px) rotate(55deg);
+    opacity: 0;
+  }
 }
-.trust-card-enter { animation: trustCardIn 0.22s cubic-bezier(0.23,1,0.32,1) both; }
+.shrimp-arc { animation: shrimpArc 18s cubic-bezier(0.25,0.1,0.25,1) infinite; }
 
-/* ── PRODUCT WEIGHT PILLS ── */
+/* ── SPLASH RING — appears when shrimp re-enters water ── */
+@keyframes splashRing {
+  0%   { transform: scale(0.1) scaleY(0.3); opacity: 0.8; }
+  100% { transform: scale(3.5) scaleY(0.3); opacity: 0; }
+}
+.splash-ring-1 { animation: splashRing 1.2s ease-out 18s infinite; animation-delay: calc(18s * 0.93); }
+.splash-ring-2 { animation: splashRing 1.6s ease-out 18s infinite; animation-delay: calc(18s * 0.93 + 0.3s); }
+
+/* ── WEIGHT PILLS ── */
 .reveal { opacity: 1; transform: none; }
-
 .wpill {
   border: 1.5px solid rgba(0,150,200,0.35);
   color: #0096c7;
@@ -156,10 +206,9 @@ body {
 }
 .wpill:hover:not(.active) { border-color: #00b4d8; color: #00b4d8; }
 
-/* ── FLOATING WA BUTTON ── */
+/* ── FLOATING WA ── */
 .wa-float {
-  position: fixed;
-  bottom: 22px; right: 22px; z-index: 280;
+  position: fixed; bottom: 22px; right: 22px; z-index: 280;
   width: 54px; height: 54px; border-radius: 50%;
   background: #25D366;
   display: flex; align-items: center; justify-content: center;
