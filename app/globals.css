@@ -221,3 +221,17 @@ body {
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #dff0fa; }
 ::-webkit-scrollbar-thumb { background: #00b4d8; border-radius: 3px; }
+
+/* ── HERO RESPONSIVE PADDING ──────────────────────────────────────
+   Mobile: 2-row nav = 14px top + 54px pill + 6px gap + 42px strip
+           = ~116px. Use 148px to give comfortable breathing room.
+   Desktop (≥520px): single-row nav = ~68px. 110px is fine.
+   ──────────────────────────────────────────────────────────────── */
+.hero-section {
+  padding-top: 148px;
+}
+@media (min-width: 520px) {
+  .hero-section {
+    padding-top: 110px;
+  }
+}
