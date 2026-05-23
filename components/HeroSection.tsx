@@ -260,7 +260,7 @@ const GLINTS = [
    ───────────────────────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
-    <section
+    <section className="hero-section"
       style={{
         position: "relative",
         minHeight: "100svh",
@@ -268,7 +268,7 @@ export default function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingTop: 110,
+        paddingTop: undefined, /* handled by .hero-section CSS class */
         paddingBottom: 60,
         paddingLeft: 20,
         paddingRight: 20,
