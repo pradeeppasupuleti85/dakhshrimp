@@ -162,47 +162,94 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
       style={{ position: "absolute", left, top, pointerEvents: "none" }}
     >
       {/* Shrimp silhouette — more detailed / realistic */}
+      {/*
+        ── AUTHENTIC SHRIMP SILHOUETTE ────────────────────────────
+        Three must-have features that distinguish shrimp from fish:
+        1. Fan tail  — 5 spread uropod rays (most distinctive)
+        2. Bent body — pronounced C-curve, not torpedo-straight
+        3. Long antennae — extend farther than the body length
+        ─────────────────────────────────────────────────────────── */}
       <svg
-        viewBox="0 0 38 22"
-        width="38"
-        height="22"
+        viewBox="0 0 68 44"
+        width="68"
+        height="44"
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter: "drop-shadow(0 0 5px rgba(0,180,216,0.55))",
+          filter: "drop-shadow(0 0 5px rgba(0,180,216,0.6))",
           willChange: "transform, opacity",
+          overflow: "visible",
         }}
         aria-hidden="true"
       >
-        {/* Body curve */}
+        {/* ── Long antennae — sweep back from head, longer than body ── */}
+        <path d="M52 12 Q32 4 8 -1"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.65"
+          strokeLinecap="round" />
+        <path d="M50 10 Q28 0 4 -3"
+          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5"
+          strokeLinecap="round" />
+        {/* Short antennule pair */}
+        <path d="M53 11 L60 6"
+          stroke="#48cae4" strokeWidth="0.7" fill="none" opacity="0.5"
+          strokeLinecap="round" />
+
+        {/* ── Rostrum — forward spike, shrimp-specific ── */}
+        <path d="M56 13 L66 7"
+          stroke="#48cae4" strokeWidth="2.0" fill="none" opacity="0.85"
+          strokeLinecap="round" />
+
+        {/* ── Body — distinct C-curve (not fish-straight) ──
+            Cephalothorax (head/thorax) larger, round on right;
+            abdomen curves and narrows toward tail on left.        */}
         <path
-          d="M3 16 C5 8, 13 3, 22 4 C30 5, 35 10, 33 15 C31 19, 25 21, 19 19 C13 17, 9 19, 6 18 Z"
+          d="M 15 28
+             C 18 25, 24 21, 30 19
+             C 36 17, 40 15, 44 13
+             C 49 11, 54 11, 58 15
+             C 61 18, 60 22, 56 24
+             C 52 25, 47 24, 42 23
+             C 36 22, 30 23, 24 26
+             C 19 28, 16 30, 15 28 Z"
           fill="#48cae4"
           opacity="0.88"
         />
-        {/* Tail fan */}
-        <path d="M3 16 C1 13, 0 10, 2 8 M3 16 C0 15, -1 12, 1 10"
-          stroke="#48cae4" strokeWidth="1.5" fill="none" opacity="0.7"
-          strokeLinecap="round" />
-        {/* Head rostrum */}
-        <path d="M33 13 L37 9 M32 11 L36 8"
-          stroke="#48cae4" strokeWidth="1.2" fill="none" opacity="0.65"
-          strokeLinecap="round" />
-        {/* Antennae */}
-        <path d="M30 5 L34 1 M28 4 L31 0"
-          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.5"
-          strokeLinecap="round" />
-        {/* Walking legs */}
-        {[14, 17, 20, 23].map((x) => (
-          <path key={x}
-            d={`M${x} 17 L${x - 3} 21 M${x} 17 L${x - 1} 21`}
-            stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5"
-            strokeLinecap="round"
-          />
-        ))}
-        {/* Eye */}
-        <circle cx="30" cy="8" r="1.5" fill="#48cae4" opacity="0.9" />
-        <circle cx="30.5" cy="7.5" r="0.6" fill="white" opacity="0.7" />
+
+        {/* ── Abdomen segments — shrimp have visible body rings ── */}
+        <line x1="23" y1="20" x2="21" y2="28" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
+        <line x1="28" y1="19" x2="26" y2="27" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
+        <line x1="33" y1="18" x2="31" y2="26" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
+        <line x1="38" y1="17" x2="37" y2="24" stroke="rgba(0,50,90,0.4)"  strokeWidth="0.9"/>
+        <line x1="43" y1="16" x2="42" y2="23" stroke="rgba(0,50,90,0.35)" strokeWidth="0.8"/>
+
+        {/* ── Fan tail — 5 uropod rays, THE key shrimp identifier ── */}
+        <path d="M15 28 L1 17"  stroke="#48cae4" strokeWidth="2.2" strokeLinecap="round" opacity="0.88"/>
+        <path d="M15 28 L0 23"  stroke="#48cae4" strokeWidth="2.2" strokeLinecap="round" opacity="0.88"/>
+        <path d="M15 28 L1 29"  stroke="#48cae4" strokeWidth="2.0" strokeLinecap="round" opacity="0.82"/>
+        <path d="M15 28 L3 36"  stroke="#48cae4" strokeWidth="1.8" strokeLinecap="round" opacity="0.75"/>
+        <path d="M15 28 L8 42"  stroke="#48cae4" strokeWidth="1.5" strokeLinecap="round" opacity="0.65"/>
+        {/* Fan membranes between rays */}
+        <path d="M1 17 C0 19 0 21 0 23"  stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.5"/>
+        <path d="M0 23 C0 27 1 31 3 36"  stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.45"/>
+        <path d="M3 36 C5 39 6 41 8 42"  stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.4"/>
+
+        {/* ── Walking legs / pleopods beneath abdomen ── */}
+        <path d="M27 26 L23 35 M27 26 L25 36"
+          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
+        <path d="M32 25 L29 34 M32 25 L30 35"
+          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
+        <path d="M37 24 L34 32 M37 24 L35 33"
+          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
+        <path d="M42 23 L40 30"
+          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.45" strokeLinecap="round"/>
+
+        {/* ── Cheliped (front claw) ── */}
+        <path d="M48 23 L45 32 M45 32 L43 36"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.6" strokeLinecap="round"/>
+
+        {/* ── Eye on stalk ── */}
+        <circle cx="57" cy="13" r="2.8" fill="#48cae4" opacity="0.95"/>
+        <circle cx="58"  cy="12" r="1.1" fill="white"  opacity="0.85"/>
       </svg>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
@@ -260,7 +307,7 @@ const GLINTS = [
    ───────────────────────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
-    <section className="hero-section"
+    <section
       style={{
         position: "relative",
         minHeight: "100svh",
@@ -268,7 +315,7 @@ export default function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingTop: undefined, /* handled by .hero-section CSS class */
+        paddingTop: 110,
         paddingBottom: 60,
         paddingLeft: 20,
         paddingRight: 20,
