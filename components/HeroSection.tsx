@@ -161,24 +161,33 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
       aria-hidden="true"
       style={{ position: "absolute", left, top, pointerEvents: "none" }}
     >
-      {/* Shrimp — real image, white bg removed, tinted cyan to match theme */}
-      {/* Place /public/shrimp.webp in your Next.js project root */}
-      <img
-        src="/shrimp.webp"
-        width={80}
-        height={80}
+      {/* Shrimp — outer div carries the arc-path animation (position/opacity) */}
+      {/* Place /public/shrimp.webp in your Next.js project root          */}
+      <div
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter:
-            "drop-shadow(0 0 6px rgba(0,180,216,0.65))" +
-            " sepia(1) saturate(3) hue-rotate(155deg) brightness(1.1)",
           willChange: "transform, opacity",
-          display: "block",
+          display: "inline-block",
         }}
-        alt=""
-        aria-hidden="true"
-      />
+      >
+        {/* Inner img carries only the body-flex animation (no transform conflict) */}
+        <img
+          src="/shrimp.webp"
+          width={80}
+          height={80}
+          style={{
+            filter:
+              "drop-shadow(0 0 6px rgba(0,180,216,0.65))" +
+              " sepia(1) saturate(3) hue-rotate(155deg) brightness(1.1)",
+            display: "block",
+            animation: "shrimpBodyFlex 0.48s ease-in-out infinite",
+            transformOrigin: "55% 28%",
+          }}
+          alt=""
+          aria-hidden="true"
+        />
+      </div>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
       {[
@@ -250,6 +259,16 @@ export default function HeroSection() {
         backgroundColor: "#010e20",
       }}
     >
+      {/* ── Shrimp body-flex keyframes (self-contained, no globals.css change needed) ── */}
+      <style>{`
+        @keyframes shrimpBodyFlex {
+          0%,100% { transform: skewX(0deg)   scaleY(1.00) scaleX(1.00); }
+          20%      { transform: skewX(5deg)   scaleY(0.94) scaleX(1.05); }
+          50%      { transform: skewX(-1.5deg) scaleY(1.03) scaleX(0.98); }
+          75%      { transform: skewX(-5deg)  scaleY(0.95) scaleX(1.04); }
+        }
+      `}</style>
+
       {/* ── Background image — NO CSS filter on Image (preserves LCP) ── */}
       <div style={{ position: "absolute", inset: 0 }}>
         <Image
