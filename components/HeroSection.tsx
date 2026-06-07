@@ -26,7 +26,7 @@ function PaddleWheelAerator({ speedClass, opacity, scale }: AeratorProps) {
     { cx:  22, cy:  0, delay: "0.68s", dur: "1.1s", cls: "spray-r", r: 1.8 },
   ];
 
-  const paddleAngles = [0, 45, 90, 135, 180, 225, 270, 315];
+  const paddleAngles =;
 
   return (
     <div
@@ -161,104 +161,65 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
       aria-hidden="true"
       style={{ position: "absolute", left, top, pointerEvents: "none" }}
     >
-      {/* Shrimp silhouette — more detailed / realistic */}
+      {/* Shrimp silhouette — Exact high-fidelity replica of premium vector logo */}
       <svg
-        viewBox="0 0 80 105"
-        width="60"
-        height="79"
+        viewBox="0 0 120 120"
+        width="65"
+        height="65"
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter: "drop-shadow(0 0 6px rgba(0,180,216,0.65))",
+          filter: "drop-shadow(0 0 8px rgba(72, 202, 228, 0.75))",
           willChange: "transform, opacity",
           overflow: "visible",
         }}
         aria-hidden="true"
       >
-        {/* ── Long antennae — sweep up-right from rostrum, longer than body ── */}
-        <path d="M60 18 C68 10 76 6 86 3"
-          stroke="#48cae4" strokeWidth="1.3" fill="none"
-          opacity="0.7" strokeLinecap="round"/>
-        <path d="M58 15 C64 6 72 1 82 -2"
-          stroke="#48cae4" strokeWidth="1.0" fill="none"
-          opacity="0.55" strokeLinecap="round"/>
-
-        {/* ── Rostrum — sharp forward spike, shrimp-specific feature ── */}
-        <path d="M62 22 L74 12"
-          stroke="#48cae4" strokeWidth="2.2" fill="none"
-          strokeLinecap="round" opacity="0.9"/>
-
-        {/* ── Cephalothorax (head + thorax) — large rounded upper section ── */}
+        {/* ── Antennae: Two clean, elegant vector paths sweeping backward ── */}
         <path
-          d="M 60 18
-             C 54 11 44 12 40 20
-             C 36 27 38 36 44 42
-             C 50 48 60 50 68 46
-             C 74 42 76 34 72 26
-             C 70 22 66 18 60 18 Z"
-          fill="#48cae4" opacity="0.90"
+          d="M 82,42 C 96,22 118,18 108,32 C 98,46 72,44 54,47"
+          stroke="#48cae4"
+          strokeWidth="1.2"
+          fill="none"
+          strokeLinecap="round"
+          opacity="0.8"
+        />
+        <path
+          d="M 80,45 C 97,28 124,26 114,40 C 102,54 76,50 57,52"
+          stroke="#48cae4"
+          strokeWidth="0.9"
+          fill="none"
+          strokeLinecap="round"
+          opacity="0.55"
         />
 
-        {/* ── Abdomen — segmented curved section narrowing to tail ── */}
+        {/* ── Cephalothorax: Sleek solid head mass ending in a sharp rostrum tip ── */}
         <path
-          d="M 44 42
-             C 40 46 36 52 33 60
-             C 30 68 28 76 29 84
-             C 30 88 32 91 34 92
-             C 38 88 42 80 45 72
-             C 48 64 50 56 50 48
-             C 48 44 46 42 44 42 Z"
-          fill="#48cae4" opacity="0.86"
+          d="M 94,39 C 82,43 66,43 54,47 C 51,51 50,58 52,62 C 60,60 69,56 74,53 C 80,48 86,44 94,39 Z"
+          fill="#48cae4"
+          opacity="0.95"
         />
+        
+        {/* Eye Details */}
+        <circle cx="76" cy="45" r="1.4" fill="#010e20" />
+        <circle cx="76.3" cy="44.7" r="0.5" fill="white" />
 
-        {/* ── Abdominal segments — 5 curved lines, key shrimp identifier ── */}
-        <path d="M 43 48 C 38 50 34 52 32 56"
-          stroke="rgba(0,40,80,0.55)" strokeWidth="1.3" fill="none" strokeLinecap="round"/>
-        <path d="M 40 56 C 35 58 31 60 29 64"
-          stroke="rgba(0,40,80,0.50)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
-        <path d="M 37 65 C 32 67 29 69 28 73"
-          stroke="rgba(0,40,80,0.45)" strokeWidth="1.1" fill="none" strokeLinecap="round"/>
-        <path d="M 34 74 C 30 75 28 77 28 80"
-          stroke="rgba(0,40,80,0.40)" strokeWidth="1.0" fill="none" strokeLinecap="round"/>
-        <path d="M 32 82 C 30 83 29 84 29 86"
-          stroke="rgba(0,40,80,0.35)" strokeWidth="0.9" fill="none" strokeLinecap="round"/>
+        {/* ── Abdominal Segments: Clean negative-space slices mapping the exact dynamic curve ── */}
+        <path d="M 51,48 C 47,50 44,53 43,58 C 45,61 47,62 49,61 C 50,58 50,53 51,48 Z" fill="#48cae4" opacity="0.92" />
+        <path d="M 42,52 C 38,55 36,58 35,63 C 37,65 39,66 41,64 C 42,61 42,56 42,52 Z" fill="#48cae4" opacity="0.90" />
+        <path d="M 34,58 C 30,61 29,65 29,70 C 31,72 33,72 34,70 C 35,67 35,62 34,58 Z" fill="#48cae4" opacity="0.88" />
+        <path d="M 29,65 C 26,69 25,74 26,79 C 28,80 30,79 31,77 C 30,73 30,69 29,65 Z" fill="#48cae4" opacity="0.86" />
+        <path d="M 26,74 C 24,79 24,84 27,88 C 29,89 31,87 31,85 C 30,81 29,77 26,74 Z" fill="#48cae4" opacity="0.84" />
+        <path d="M 27,83 C 26,88 28,93 32,96 C 34,95 35,93 34,90 C 31,88 29,85 27,83 Z" fill="#48cae4" opacity="0.82" />
 
-        {/* ── 3-petal fan tail — most distinctive shrimp feature ── */}
-        {/* Left petal — longest, sweeps most to the left */}
-        <path
-          d="M 34 92 C 28 93 20 96 14 101 C 16 96 22 90 28 88 Z"
-          fill="#48cae4" opacity="0.88"
-        />
-        {/* Middle petal — points straight down */}
-        <path
-          d="M 34 92 C 31 95 28 100 28 105 C 31 101 35 96 36 92 Z"
-          fill="#48cae4" opacity="0.84"
-        />
-        {/* Right petal — curves slightly right */}
-        <path
-          d="M 34 92 C 38 94 44 97 46 101 C 42 97 38 93 36 91 Z"
-          fill="#48cae4" opacity="0.80"
-        />
+        {/* ── Tail Fan: Smooth split-pointed uropods ── */}
+        <path d="M 32,95 C 29,101 24,106 17,110 C 22,104 27,99 31,94 Z" fill="#48cae4" opacity="0.92" />
+        <path d="M 32,95 C 30,103 26,110 20,115 C 24,108 28,102 31,95 Z" fill="#48cae4" opacity="0.88" />
 
-        {/* ── Legs — cluster under cephalothorax (5 pairs) ── */}
-        <path d="M 50 48 L 44 58 M 44 58 L 40 63"
-          stroke="#48cae4" strokeWidth="1.1" fill="none" opacity="0.60" strokeLinecap="round"/>
-        <path d="M 54 47 L 48 56 M 48 56 L 44 60"
-          stroke="#48cae4" strokeWidth="1.1" fill="none" opacity="0.58" strokeLinecap="round"/>
-        <path d="M 58 46 L 53 54 M 53 54 L 50 58"
-          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.55" strokeLinecap="round"/>
-        <path d="M 62 44 L 58 52 M 58 52 L 55 55"
-          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.52" strokeLinecap="round"/>
-        <path d="M 66 43 L 63 49 M 63 49 L 60 52"
-          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.48" strokeLinecap="round"/>
-
-        {/* ── Cheliped (front claws) ── */}
-        <path d="M 60 48 L 55 58 M 55 58 L 51 64 M 55 58 L 53 65"
-          stroke="#48cae4" strokeWidth="1.2" fill="none" opacity="0.62" strokeLinecap="round"/>
-
-        {/* ── Eye on stalk ── */}
-        <circle cx="60" cy="24" r="3.2" fill="#48cae4" opacity="0.98"/>
-        <circle cx="61" cy="23" r="1.3" fill="white"  opacity="0.88"/>
+        {/* ── Legs: Under-thorax vector leg clusters ── */}
+        <path d="M 55,61 C 57,68 62,73 68,76 C 64,73 60,67 56,61 Z" fill="#48cae4" opacity="0.75" />
+        <path d="M 60,59 C 63,66 68,71 74,73 C 70,70 65,65 61,59 Z" fill="#48cae4" opacity="0.75" />
+        <path d="M 65,57 C 68,63 73,67 79,69 C 75,67 70,62 66,57 Z" fill="#48cae4" opacity="0.70" />
       </svg>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
@@ -398,7 +359,7 @@ export default function HeroSection() {
       ))}
 
       {/* Shimmer lines — soft surface light */}
-      {[37, 54, 70].map((pct, i) => (
+      {.map((pct, i) => (
         <div key={i} aria-hidden="true" className="shimmer-line"
           style={{
             position: "absolute", left: 0, right: 0, top: `${pct}%`,
