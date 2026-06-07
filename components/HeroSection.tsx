@@ -26,7 +26,7 @@ function PaddleWheelAerator({ speedClass, opacity, scale }: AeratorProps) {
     { cx:  22, cy:  0, delay: "0.68s", dur: "1.1s", cls: "spray-r", r: 1.8 },
   ];
 
-  const paddleAngles =;
+  const paddleAngles = [0, 45, 90, 135, 180, 225, 270, 315];
 
   return (
     <div
@@ -161,65 +161,48 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
       aria-hidden="true"
       style={{ position: "absolute", left, top, pointerEvents: "none" }}
     >
-      {/* Shrimp silhouette — Exact high-fidelity replica of premium vector logo */}
+      {/* Shrimp silhouette — more detailed / realistic */}
       <svg
-        viewBox="0 0 120 120"
-        width="65"
-        height="65"
+        viewBox="0 0 38 22"
+        width="38"
+        height="22"
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter: "drop-shadow(0 0 8px rgba(72, 202, 228, 0.75))",
+          filter: "drop-shadow(0 0 5px rgba(0,180,216,0.55))",
           willChange: "transform, opacity",
-          overflow: "visible",
         }}
         aria-hidden="true"
       >
-        {/* ── Antennae: Two clean, elegant vector paths sweeping backward ── */}
+        {/* Body curve */}
         <path
-          d="M 82,42 C 96,22 118,18 108,32 C 98,46 72,44 54,47"
-          stroke="#48cae4"
-          strokeWidth="1.2"
-          fill="none"
-          strokeLinecap="round"
-          opacity="0.8"
-        />
-        <path
-          d="M 80,45 C 97,28 124,26 114,40 C 102,54 76,50 57,52"
-          stroke="#48cae4"
-          strokeWidth="0.9"
-          fill="none"
-          strokeLinecap="round"
-          opacity="0.55"
-        />
-
-        {/* ── Cephalothorax: Sleek solid head mass ending in a sharp rostrum tip ── */}
-        <path
-          d="M 94,39 C 82,43 66,43 54,47 C 51,51 50,58 52,62 C 60,60 69,56 74,53 C 80,48 86,44 94,39 Z"
+          d="M3 16 C5 8, 13 3, 22 4 C30 5, 35 10, 33 15 C31 19, 25 21, 19 19 C13 17, 9 19, 6 18 Z"
           fill="#48cae4"
-          opacity="0.95"
+          opacity="0.88"
         />
-        
-        {/* Eye Details */}
-        <circle cx="76" cy="45" r="1.4" fill="#010e20" />
-        <circle cx="76.3" cy="44.7" r="0.5" fill="white" />
-
-        {/* ── Abdominal Segments: Clean negative-space slices mapping the exact dynamic curve ── */}
-        <path d="M 51,48 C 47,50 44,53 43,58 C 45,61 47,62 49,61 C 50,58 50,53 51,48 Z" fill="#48cae4" opacity="0.92" />
-        <path d="M 42,52 C 38,55 36,58 35,63 C 37,65 39,66 41,64 C 42,61 42,56 42,52 Z" fill="#48cae4" opacity="0.90" />
-        <path d="M 34,58 C 30,61 29,65 29,70 C 31,72 33,72 34,70 C 35,67 35,62 34,58 Z" fill="#48cae4" opacity="0.88" />
-        <path d="M 29,65 C 26,69 25,74 26,79 C 28,80 30,79 31,77 C 30,73 30,69 29,65 Z" fill="#48cae4" opacity="0.86" />
-        <path d="M 26,74 C 24,79 24,84 27,88 C 29,89 31,87 31,85 C 30,81 29,77 26,74 Z" fill="#48cae4" opacity="0.84" />
-        <path d="M 27,83 C 26,88 28,93 32,96 C 34,95 35,93 34,90 C 31,88 29,85 27,83 Z" fill="#48cae4" opacity="0.82" />
-
-        {/* ── Tail Fan: Smooth split-pointed uropods ── */}
-        <path d="M 32,95 C 29,101 24,106 17,110 C 22,104 27,99 31,94 Z" fill="#48cae4" opacity="0.92" />
-        <path d="M 32,95 C 30,103 26,110 20,115 C 24,108 28,102 31,95 Z" fill="#48cae4" opacity="0.88" />
-
-        {/* ── Legs: Under-thorax vector leg clusters ── */}
-        <path d="M 55,61 C 57,68 62,73 68,76 C 64,73 60,67 56,61 Z" fill="#48cae4" opacity="0.75" />
-        <path d="M 60,59 C 63,66 68,71 74,73 C 70,70 65,65 61,59 Z" fill="#48cae4" opacity="0.75" />
-        <path d="M 65,57 C 68,63 73,67 79,69 C 75,67 70,62 66,57 Z" fill="#48cae4" opacity="0.70" />
+        {/* Tail fan */}
+        <path d="M3 16 C1 13, 0 10, 2 8 M3 16 C0 15, -1 12, 1 10"
+          stroke="#48cae4" strokeWidth="1.5" fill="none" opacity="0.7"
+          strokeLinecap="round" />
+        {/* Head rostrum */}
+        <path d="M33 13 L37 9 M32 11 L36 8"
+          stroke="#48cae4" strokeWidth="1.2" fill="none" opacity="0.65"
+          strokeLinecap="round" />
+        {/* Antennae */}
+        <path d="M30 5 L34 1 M28 4 L31 0"
+          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.5"
+          strokeLinecap="round" />
+        {/* Walking legs */}
+        {[14, 17, 20, 23].map((x) => (
+          <path key={x}
+            d={`M${x} 17 L${x - 3} 21 M${x} 17 L${x - 1} 21`}
+            stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5"
+            strokeLinecap="round"
+          />
+        ))}
+        {/* Eye */}
+        <circle cx="30" cy="8" r="1.5" fill="#48cae4" opacity="0.9" />
+        <circle cx="30.5" cy="7.5" r="0.6" fill="white" opacity="0.7" />
       </svg>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
@@ -277,7 +260,7 @@ const GLINTS = [
    ───────────────────────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
-    <section
+    <section className="hero-section"
       style={{
         position: "relative",
         minHeight: "100svh",
@@ -285,7 +268,7 @@ export default function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingTop: 110,
+        paddingTop: undefined, /* handled by .hero-section CSS class */
         paddingBottom: 60,
         paddingLeft: 20,
         paddingRight: 20,
@@ -359,7 +342,7 @@ export default function HeroSection() {
       ))}
 
       {/* Shimmer lines — soft surface light */}
-      {.map((pct, i) => (
+      {[37, 54, 70].map((pct, i) => (
         <div key={i} aria-hidden="true" className="shimmer-line"
           style={{
             position: "absolute", left: 0, right: 0, top: `${pct}%`,
