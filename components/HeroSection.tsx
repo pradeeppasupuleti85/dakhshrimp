@@ -163,46 +163,105 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
     >
       {/* Shrimp silhouette — more detailed / realistic */}
       <svg
-        viewBox="0 0 38 22"
-        width="38"
-        height="22"
+        viewBox="0 0 80 105"
+        width="60"
+        height="79"
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter: "drop-shadow(0 0 5px rgba(0,180,216,0.55))",
+          filter: "drop-shadow(0 0 6px rgba(0,180,216,0.65))",
           willChange: "transform, opacity",
+          overflow: "visible",
         }}
         aria-hidden="true"
       >
-        {/* Body curve */}
+        {/* ── Antennae — two long arcing curves sweeping beyond the rostrum ── */}
+        <path d="M 63 20 C 74 8, 83 2, 91 -1"
+          stroke="#48cae4" strokeWidth="1.5" fill="none"
+          opacity="0.72" strokeLinecap="round"/>
+        <path d="M 61 18 C 70 5, 80 -1, 88 -4"
+          stroke="#48cae4" strokeWidth="1.1" fill="none"
+          opacity="0.55" strokeLinecap="round"/>
+
+        {/* ── Rostrum — forward spike at the head front ── */}
+        <path d="M 63 21 L 77 11"
+          stroke="#48cae4" strokeWidth="2.5" fill="none"
+          strokeLinecap="round" opacity="0.93"/>
+
+        {/* ── Cephalothorax — large dominant rounded head+thorax mass ── */}
         <path
-          d="M3 16 C5 8, 13 3, 22 4 C30 5, 35 10, 33 15 C31 19, 25 21, 19 19 C13 17, 9 19, 6 18 Z"
-          fill="#48cae4"
-          opacity="0.88"
+          d="M 58 16
+             C 51 9, 43 11, 39 19
+             C 36 26, 38 37, 43 44
+             C 49 51, 62 52, 69 46
+             C 74 39, 74 27, 70 21
+             C 67 17, 63 14, 58 16 Z"
+          fill="#48cae4" opacity="0.92"
         />
-        {/* Tail fan */}
-        <path d="M3 16 C1 13, 0 10, 2 8 M3 16 C0 15, -1 12, 1 10"
-          stroke="#48cae4" strokeWidth="1.5" fill="none" opacity="0.7"
-          strokeLinecap="round" />
-        {/* Head rostrum */}
-        <path d="M33 13 L37 9 M32 11 L36 8"
-          stroke="#48cae4" strokeWidth="1.2" fill="none" opacity="0.65"
-          strokeLinecap="round" />
-        {/* Antennae */}
-        <path d="M30 5 L34 1 M28 4 L31 0"
-          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.5"
-          strokeLinecap="round" />
-        {/* Walking legs */}
-        {[14, 17, 20, 23].map((x) => (
-          <path key={x}
-            d={`M${x} 17 L${x - 3} 21 M${x} 17 L${x - 1} 21`}
-            stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5"
-            strokeLinecap="round"
-          />
-        ))}
-        {/* Eye */}
-        <circle cx="30" cy="8" r="1.5" fill="#48cae4" opacity="0.9" />
-        <circle cx="30.5" cy="7.5" r="0.6" fill="white" opacity="0.7" />
+
+        {/* ── Abdomen — smooth C-curve, widest in middle, narrows to tail ── */}
+        <path
+          d="M 43 43
+             C 38 51, 31 63, 28 74
+             C 25 83, 25 91, 29 95
+             C 31 98, 35 99, 37 98
+             C 43 92, 49 81, 51 70
+             C 53 61, 52 53, 49 47
+             C 47 43, 45 42, 43 43 Z"
+          fill="#48cae4" opacity="0.88"
+        />
+
+        {/* ── 5 segment furrows — curved lines spanning abdomen width ── */}
+        <path d="M 41 51 C 44 49, 47 49, 49 52"
+          stroke="rgba(0,36,72,0.52)" strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+        <path d="M 36 62 C 40 60, 44 60, 50 63"
+          stroke="rgba(0,36,72,0.46)" strokeWidth="1.3" fill="none" strokeLinecap="round"/>
+        <path d="M 31 72 C 36 70, 42 70, 50 72"
+          stroke="rgba(0,36,72,0.40)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+        <path d="M 28 81 C 33 79, 38 79, 47 82"
+          stroke="rgba(0,36,72,0.33)" strokeWidth="1.1" fill="none" strokeLinecap="round"/>
+        <path d="M 26 89 C 30 88, 34 88, 41 90"
+          stroke="rgba(0,36,72,0.26)" strokeWidth="1.0" fill="none" strokeLinecap="round"/>
+
+        {/* ── Tail fan — 3 wide rounded petals (uropods + telson) ── */}
+        {/* Left petal — longest, arcs to lower-left */}
+        <path
+          d="M 27 93 C 15 87, 4 96, 7 106
+             C 12 103, 24 97, 36 95 Z"
+          fill="#48cae4" opacity="0.88"
+        />
+        {/* Centre petal — broad, points mostly downward */}
+        <path
+          d="M 31 95 C 23 100, 20 108, 23 113
+             C 28 109, 37 102, 38 96 Z"
+          fill="#48cae4" opacity="0.84"
+        />
+        {/* Right petal — arcs to lower-right */}
+        <path
+          d="M 36 93 C 43 89, 53 91, 56 100
+             C 50 98, 44 94, 38 95 Z"
+          fill="#48cae4" opacity="0.80"
+        />
+
+        {/* ── Legs — 5 pairs fanning below the cephalothorax ── */}
+        <path d="M 49 50 L 43 59 L 39 65"
+          stroke="#48cae4" strokeWidth="1.1" fill="none" opacity="0.60" strokeLinecap="round"/>
+        <path d="M 54 49 L 48 58 L 44 63"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.55" strokeLinecap="round"/>
+        <path d="M 58 47 L 53 55 L 50 60"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.50" strokeLinecap="round"/>
+        <path d="M 62 45 L 58 53 L 55 57"
+          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.46" strokeLinecap="round"/>
+        <path d="M 66 43 L 63 50 L 61 54"
+          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.42" strokeLinecap="round"/>
+
+        {/* ── Cheliped — front claw pair at thorax base ── */}
+        <path d="M 57 51 L 51 62 M 51 62 L 47 68 M 51 62 L 48 69"
+          stroke="#48cae4" strokeWidth="1.3" fill="none" opacity="0.65" strokeLinecap="round"/>
+
+        {/* ── Eye with specular highlight ── */}
+        <circle cx="60" cy="26" r="3.4" fill="#48cae4" opacity="0.98"/>
+        <circle cx="61.2" cy="25" r="1.35" fill="white" opacity="0.90"/>
       </svg>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
@@ -260,7 +319,7 @@ const GLINTS = [
    ───────────────────────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
-    <section className="hero-section"
+    <section
       style={{
         position: "relative",
         minHeight: "100svh",
@@ -268,7 +327,7 @@ export default function HeroSection() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingTop: undefined, /* handled by .hero-section CSS class */
+        paddingTop: 110,
         paddingBottom: 60,
         paddingLeft: 20,
         paddingRight: 20,
