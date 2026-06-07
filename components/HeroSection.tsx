@@ -162,94 +162,103 @@ function ShrimpMoment({ left, top, delay }: { left: string; top: string; delay: 
       style={{ position: "absolute", left, top, pointerEvents: "none" }}
     >
       {/* Shrimp silhouette — more detailed / realistic */}
-      {/*
-        ── AUTHENTIC SHRIMP SILHOUETTE ────────────────────────────
-        Three must-have features that distinguish shrimp from fish:
-        1. Fan tail  — 5 spread uropod rays (most distinctive)
-        2. Bent body — pronounced C-curve, not torpedo-straight
-        3. Long antennae — extend farther than the body length
-        ─────────────────────────────────────────────────────────── */}
       <svg
-        viewBox="0 0 68 44"
-        width="68"
-        height="44"
+        viewBox="0 0 80 105"
+        width="60"
+        height="79"
         className="shrimp-arc"
         style={{
           animationDelay: delay,
-          filter: "drop-shadow(0 0 5px rgba(0,180,216,0.6))",
+          filter: "drop-shadow(0 0 6px rgba(0,180,216,0.65))",
           willChange: "transform, opacity",
           overflow: "visible",
         }}
         aria-hidden="true"
       >
-        {/* ── Long antennae — sweep back from head, longer than body ── */}
-        <path d="M52 12 Q32 4 8 -1"
-          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.65"
-          strokeLinecap="round" />
-        <path d="M50 10 Q28 0 4 -3"
-          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5"
-          strokeLinecap="round" />
-        {/* Short antennule pair */}
-        <path d="M53 11 L60 6"
-          stroke="#48cae4" strokeWidth="0.7" fill="none" opacity="0.5"
-          strokeLinecap="round" />
+        {/* ── Long antennae — sweep up-right from rostrum, longer than body ── */}
+        <path d="M60 18 C68 10 76 6 86 3"
+          stroke="#48cae4" strokeWidth="1.3" fill="none"
+          opacity="0.7" strokeLinecap="round"/>
+        <path d="M58 15 C64 6 72 1 82 -2"
+          stroke="#48cae4" strokeWidth="1.0" fill="none"
+          opacity="0.55" strokeLinecap="round"/>
 
-        {/* ── Rostrum — forward spike, shrimp-specific ── */}
-        <path d="M56 13 L66 7"
-          stroke="#48cae4" strokeWidth="2.0" fill="none" opacity="0.85"
-          strokeLinecap="round" />
+        {/* ── Rostrum — sharp forward spike, shrimp-specific feature ── */}
+        <path d="M62 22 L74 12"
+          stroke="#48cae4" strokeWidth="2.2" fill="none"
+          strokeLinecap="round" opacity="0.9"/>
 
-        {/* ── Body — distinct C-curve (not fish-straight) ──
-            Cephalothorax (head/thorax) larger, round on right;
-            abdomen curves and narrows toward tail on left.        */}
+        {/* ── Cephalothorax (head + thorax) — large rounded upper section ── */}
         <path
-          d="M 15 28
-             C 18 25, 24 21, 30 19
-             C 36 17, 40 15, 44 13
-             C 49 11, 54 11, 58 15
-             C 61 18, 60 22, 56 24
-             C 52 25, 47 24, 42 23
-             C 36 22, 30 23, 24 26
-             C 19 28, 16 30, 15 28 Z"
-          fill="#48cae4"
-          opacity="0.88"
+          d="M 60 18
+             C 54 11 44 12 40 20
+             C 36 27 38 36 44 42
+             C 50 48 60 50 68 46
+             C 74 42 76 34 72 26
+             C 70 22 66 18 60 18 Z"
+          fill="#48cae4" opacity="0.90"
         />
 
-        {/* ── Abdomen segments — shrimp have visible body rings ── */}
-        <line x1="23" y1="20" x2="21" y2="28" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
-        <line x1="28" y1="19" x2="26" y2="27" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
-        <line x1="33" y1="18" x2="31" y2="26" stroke="rgba(0,50,90,0.45)" strokeWidth="0.9"/>
-        <line x1="38" y1="17" x2="37" y2="24" stroke="rgba(0,50,90,0.4)"  strokeWidth="0.9"/>
-        <line x1="43" y1="16" x2="42" y2="23" stroke="rgba(0,50,90,0.35)" strokeWidth="0.8"/>
+        {/* ── Abdomen — segmented curved section narrowing to tail ── */}
+        <path
+          d="M 44 42
+             C 40 46 36 52 33 60
+             C 30 68 28 76 29 84
+             C 30 88 32 91 34 92
+             C 38 88 42 80 45 72
+             C 48 64 50 56 50 48
+             C 48 44 46 42 44 42 Z"
+          fill="#48cae4" opacity="0.86"
+        />
 
-        {/* ── Fan tail — 5 uropod rays, THE key shrimp identifier ── */}
-        <path d="M15 28 L1 17"  stroke="#48cae4" strokeWidth="2.2" strokeLinecap="round" opacity="0.88"/>
-        <path d="M15 28 L0 23"  stroke="#48cae4" strokeWidth="2.2" strokeLinecap="round" opacity="0.88"/>
-        <path d="M15 28 L1 29"  stroke="#48cae4" strokeWidth="2.0" strokeLinecap="round" opacity="0.82"/>
-        <path d="M15 28 L3 36"  stroke="#48cae4" strokeWidth="1.8" strokeLinecap="round" opacity="0.75"/>
-        <path d="M15 28 L8 42"  stroke="#48cae4" strokeWidth="1.5" strokeLinecap="round" opacity="0.65"/>
-        {/* Fan membranes between rays */}
-        <path d="M1 17 C0 19 0 21 0 23"  stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.5"/>
-        <path d="M0 23 C0 27 1 31 3 36"  stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.45"/>
-        <path d="M3 36 C5 39 6 41 8 42"  stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.4"/>
+        {/* ── Abdominal segments — 5 curved lines, key shrimp identifier ── */}
+        <path d="M 43 48 C 38 50 34 52 32 56"
+          stroke="rgba(0,40,80,0.55)" strokeWidth="1.3" fill="none" strokeLinecap="round"/>
+        <path d="M 40 56 C 35 58 31 60 29 64"
+          stroke="rgba(0,40,80,0.50)" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+        <path d="M 37 65 C 32 67 29 69 28 73"
+          stroke="rgba(0,40,80,0.45)" strokeWidth="1.1" fill="none" strokeLinecap="round"/>
+        <path d="M 34 74 C 30 75 28 77 28 80"
+          stroke="rgba(0,40,80,0.40)" strokeWidth="1.0" fill="none" strokeLinecap="round"/>
+        <path d="M 32 82 C 30 83 29 84 29 86"
+          stroke="rgba(0,40,80,0.35)" strokeWidth="0.9" fill="none" strokeLinecap="round"/>
 
-        {/* ── Walking legs / pleopods beneath abdomen ── */}
-        <path d="M27 26 L23 35 M27 26 L25 36"
-          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
-        <path d="M32 25 L29 34 M32 25 L30 35"
-          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
-        <path d="M37 24 L34 32 M37 24 L35 33"
-          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.5" strokeLinecap="round"/>
-        <path d="M42 23 L40 30"
-          stroke="#48cae4" strokeWidth="0.8" fill="none" opacity="0.45" strokeLinecap="round"/>
+        {/* ── 3-petal fan tail — most distinctive shrimp feature ── */}
+        {/* Left petal — longest, sweeps most to the left */}
+        <path
+          d="M 34 92 C 28 93 20 96 14 101 C 16 96 22 90 28 88 Z"
+          fill="#48cae4" opacity="0.88"
+        />
+        {/* Middle petal — points straight down */}
+        <path
+          d="M 34 92 C 31 95 28 100 28 105 C 31 101 35 96 36 92 Z"
+          fill="#48cae4" opacity="0.84"
+        />
+        {/* Right petal — curves slightly right */}
+        <path
+          d="M 34 92 C 38 94 44 97 46 101 C 42 97 38 93 36 91 Z"
+          fill="#48cae4" opacity="0.80"
+        />
 
-        {/* ── Cheliped (front claw) ── */}
-        <path d="M48 23 L45 32 M45 32 L43 36"
-          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.6" strokeLinecap="round"/>
+        {/* ── Legs — cluster under cephalothorax (5 pairs) ── */}
+        <path d="M 50 48 L 44 58 M 44 58 L 40 63"
+          stroke="#48cae4" strokeWidth="1.1" fill="none" opacity="0.60" strokeLinecap="round"/>
+        <path d="M 54 47 L 48 56 M 48 56 L 44 60"
+          stroke="#48cae4" strokeWidth="1.1" fill="none" opacity="0.58" strokeLinecap="round"/>
+        <path d="M 58 46 L 53 54 M 53 54 L 50 58"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.55" strokeLinecap="round"/>
+        <path d="M 62 44 L 58 52 M 58 52 L 55 55"
+          stroke="#48cae4" strokeWidth="1.0" fill="none" opacity="0.52" strokeLinecap="round"/>
+        <path d="M 66 43 L 63 49 M 63 49 L 60 52"
+          stroke="#48cae4" strokeWidth="0.9" fill="none" opacity="0.48" strokeLinecap="round"/>
+
+        {/* ── Cheliped (front claws) ── */}
+        <path d="M 60 48 L 55 58 M 55 58 L 51 64 M 55 58 L 53 65"
+          stroke="#48cae4" strokeWidth="1.2" fill="none" opacity="0.62" strokeLinecap="round"/>
 
         {/* ── Eye on stalk ── */}
-        <circle cx="57" cy="13" r="2.8" fill="#48cae4" opacity="0.95"/>
-        <circle cx="58"  cy="12" r="1.1" fill="white"  opacity="0.85"/>
+        <circle cx="60" cy="24" r="3.2" fill="#48cae4" opacity="0.98"/>
+        <circle cx="61" cy="23" r="1.3" fill="white"  opacity="0.88"/>
       </svg>
 
       {/* Splash rings — triggered at re-entry (~93% of 18s ≈ 16.7s) */}
